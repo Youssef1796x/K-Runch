@@ -85,7 +85,7 @@ export default function CartSummary({
   );
 
   const handleWhatsAppOrder = () => {
-    const currentTime = new Date().toLocaleTimeString("ar-EG", {
+    const currentTime = new Date().toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",
     });
@@ -94,17 +94,16 @@ export default function CartSummary({
       .map((group) => {
         const lines = group.lines
           .map((line) => {
-            const option = line.optionLabel
+            const optionLabel = line.optionLabel
               ? ` — ${line.optionLabel}`
               : "";
-
             const lineTotal = line.price * line.quantity;
 
-            return `${group.item.name}${option} × ${line.quantity} = ${lineTotal} جنيه`;
+            return `${optionLabel ? `${line.optionLabel} × ` : "× "}${line.quantity} = ${lineTotal} جنيه`;
           })
           .join("\n");
 
-        return lines;
+        return `*${group.item.name}*\n${lines}`;
       })
       .join("\n\n");
 
