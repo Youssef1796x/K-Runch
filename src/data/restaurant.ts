@@ -20,6 +20,7 @@ export type RestaurantConfig = {
     heading: string;
     body: string;
     address: string;
+    mapsUrl: string;
     hours: string;
     phone: string;
     whatsapp: string;
@@ -48,15 +49,16 @@ export const restaurantConfig: RestaurantConfig = {
   },
 
   hero: {
-  heading: "طعم مصري على مزاجك",
-  body: "برجر، ساندوتشات وكريب معمولين بحب وطعم يخليك ترجع تاني.",
-  cta: "شوف المنيو",
-},
+    heading: "طعم مصري على مزاجك",
+    body: "برجر، ساندوتشات وكريب معمولين بحب وطعم يخليك ترجع تاني.",
+    cta: "شوف المنيو",
+  },
 
   location: {
     heading: "مستنيينك عندنا",
     body: "تقدر تزورنا في الفرع أو تتواصل معانا وتطلب بسهولة.",
     address: "المحلة الكبرى",
+    mapsUrl: "https://maps.app.goo.gl/8BxfrQCY8D8EwNABA",
     hours: "يومياً من 10ص لـ 10م",
     phone: "01005069811",
     whatsapp: "01005069811",
