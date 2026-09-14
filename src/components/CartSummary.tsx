@@ -85,6 +85,7 @@ export default function CartSummary({
   );
 
   const handleWhatsAppOrder = () => {
+    const rtlMark = "\u200F";
     const currentTime = new Date().toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",
@@ -94,29 +95,36 @@ export default function CartSummary({
       .map((group) => {
         const lines = group.lines
           .map((line) => {
-            const optionLabel = line.optionLabel
-              ? ` — ${line.optionLabel}`
-              : "";
             const lineTotal = line.price * line.quantity;
 
-            return `${optionLabel ? `${line.optionLabel} × ` : "× "}${line.quantity} = ${lineTotal} جنيه`;
+            if (line.optionLabel) {
+              return `${rtlMark}${line.optionLabel} × ${line.quantity} = ${lineTotal} جنيه`;
+            }
+
+            return line.quantity === 1
+              ? `${rtlMark}${line.item.name} · ${lineTotal} جنيه`
+              : `${rtlMark}${line.item.name} × ${line.quantity} = ${lineTotal} جنيه`;
           })
           .join("\n");
 
-        return `*${group.item.name}*\n${lines}`;
+        if (group.lines.some((line) => line.optionLabel)) {
+          return `${rtlMark}${group.item.name}\n${lines}`;
+        }
+
+        return lines;
       })
       .join("\n\n");
 
     const message = [
-      `*طلب جديد من ${restaurantConfig.name}*`,
+      `${rtlMark}*طلب جديد من ${restaurantConfig.name}*`,
       "",
-      `*الوقت:* ${currentTime}`,
+      `${rtlMark}🕐 *الوقت:* ${currentTime}`,
       "",
-      "*الطلب:*",
+      `${rtlMark}🛒 *الطلب:*`,
       "",
       orderLines,
       "",
-      `💰 *الإجمالي: ${totalPrice} جنيه*`,
+      `${rtlMark}💰 *الإجمالي: ${totalPrice} جنيه*`,
     ].join("\n");
 
     const whatsappNumber = `20${restaurantConfig.location.whatsapp.slice(1)}`;
