@@ -59,7 +59,7 @@ export const restaurantConfig: RestaurantConfig = {
     address: "المحلة الكبرى",
     hours: "يومياً من 10ص لـ 10م",
     phone: "01005069811",
-    whatsapp: "01208852130",
+    whatsapp: "01005069811",
   },
 
   socials: {
