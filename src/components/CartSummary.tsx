@@ -19,6 +19,11 @@ type CartLine = {
   quantity: number;
 };
 
+type CartGroup = {
+  item: MenuItem;
+  lines: CartLine[];
+};
+
 const getQuantityKey = (itemId: string, optionLabel?: string) =>
   optionLabel ? `${itemId}::${optionLabel}` : itemId;
 
@@ -54,6 +59,14 @@ export default function CartSummary({
         ]
       : [];
   });
+
+  const cartGroups: CartGroup[] = items.reduce<CartGroup[]>((groups, item) => {
+    const lines = cartLines.filter((line) => line.item.id === item.id);
+
+    if (lines.length === 0) return groups;
+
+    return [...groups, { item, lines }];
+  }, []);
 
   const totalQuantity = cartLines.reduce(
     (total, line) => total + line.quantity,
@@ -114,46 +127,55 @@ export default function CartSummary({
             </div>
 
             <div className="divide-y divide-(--line)">
-              {cartLines.map((line) => {
-                const { item, optionLabel, price, quantity } = line;
+              {cartGroups.map((group) => (
+                <div key={group.item.id} className="py-3">
+                  <h3 className="text-sm font-bold text-(--ink)">
+                    {group.item.name}
+                  </h3>
 
-                return (
-                  <div
-                    key={`${item.id}-${optionLabel ?? "default"}`}
-                    className="flex items-center gap-3 py-3"
-                  >
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-sm font-bold text-(--ink)">{item.name}</h3>
-                      <p className="mt-1 text-xs text-(--ink-soft)">
-                        {optionLabel ? `${optionLabel} · ` : ""}
-                        {price} جنيه × {quantity}
-                      </p>
-                    </div>
+                  <div className="mt-2 space-y-2">
+                    {group.lines.map((line) => (
+                      <div
+                        key={`${line.item.id}-${line.optionLabel ?? "default"}`}
+                        className="flex items-center gap-3"
+                      >
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs text-(--ink-soft)">
+                            {line.optionLabel ? `${line.optionLabel} · ` : ""}
+                            {line.price} جنيه × {line.quantity}
+                          </p>
+                        </div>
 
-                    <div className="flex items-center gap-1 rounded-lg border border-(--line) p-1">
-                      <button
-                        type="button"
-                        onClick={() => onIncrease(item.id, optionLabel)}
-                        aria-label={`زود ${item.name}${optionLabel ? ` - ${optionLabel}` : ""}`}
-                        className="flex size-8 items-center justify-center rounded-md text-base font-bold text-(--ink) hover:bg-(--accent-glow)"
-                      >
-                        +
-                      </button>
-                      <span className="min-w-6 text-center text-sm font-bold text-(--ink)">
-                        {quantity}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => onDecrease(item.id, optionLabel)}
-                        aria-label={`قلل ${item.name}${optionLabel ? ` - ${optionLabel}` : ""}`}
-                        className="flex size-8 items-center justify-center rounded-md text-base font-bold text-(--ink) hover:bg-(--accent-glow)"
-                      >
-                        −
-                      </button>
-                    </div>
+                        <div className="flex shrink-0 items-center gap-1 rounded-lg border border-(--line) p-1">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              onIncrease(line.item.id, line.optionLabel)
+                            }
+                            aria-label={`زود ${line.item.name}${line.optionLabel ? ` - ${line.optionLabel}` : ""}`}
+                            className="flex size-8 items-center justify-center rounded-md text-base font-bold text-(--ink) hover:bg-(--accent-glow)"
+                          >
+                            +
+                          </button>
+                          <span className="min-w-6 text-center text-sm font-bold text-(--ink)">
+                            {line.quantity}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              onDecrease(line.item.id, line.optionLabel)
+                            }
+                            aria-label={`قلل ${line.item.name}${line.optionLabel ? ` - ${line.optionLabel}` : ""}`}
+                            className="flex size-8 items-center justify-center rounded-md text-base font-bold text-(--ink) hover:bg-(--accent-glow)"
+                          >
+                            −
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
 
             <div className="mt-2 flex items-center justify-between border-t border-(--line) pt-4">
