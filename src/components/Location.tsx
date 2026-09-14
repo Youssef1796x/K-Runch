@@ -21,7 +21,7 @@ export default function Location() {
               {restaurantConfig.location.body}
             </p>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl border border-(--line) bg-(--surface) p-4">
                 <div className="flex items-start gap-3">
                   <MapPin
@@ -41,7 +41,7 @@ export default function Location() {
                       href={restaurantConfig.location.mapsUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-2 inline-block text-xs font-bold text-(--accent) hover:underline"
+                      className="mt-2 inline-block rounded-sm text-xs font-bold text-(--accent) hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
                     >
                       شوف المكان على الخريطة
                     </a>
@@ -81,7 +81,7 @@ export default function Location() {
                     <div className="mt-3 grid grid-cols-2 gap-3">
                       <a
                         href={`tel:${restaurantConfig.location.phone}`}
-                        className="min-w-0 text-sm font-semibold text-(--ink) hover:text-(--accent)"
+                        className="min-w-0 rounded-sm text-sm font-semibold text-(--ink) hover:text-(--accent) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
                       >
                         <span className="flex items-center gap-1.5 text-xs text-(--ink-muted)">
                           <Phone size={14} aria-hidden="true" />
@@ -97,7 +97,7 @@ export default function Location() {
                         href={`https://wa.me/20${restaurantConfig.location.whatsapp.slice(1)}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="min-w-0 text-sm font-semibold text-(--ink) hover:text-(--accent)"
+                        className="min-w-0 rounded-sm text-sm font-semibold text-(--ink) hover:text-(--accent) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
                       >
                         <span className="flex items-center gap-1.5 text-xs text-(--ink-muted)">
                           <MessageCircle size={14} aria-hidden="true" />
