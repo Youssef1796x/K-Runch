@@ -1,19 +1,5 @@
 import { Share2, Star } from "lucide-react";
-
-const reviews = [
-  {
-    name: "كريم",
-    username: "@demo_kareem",
-    initial: "ك",
-    text: "جربت الأكل وكانت التجربة حلوة جدًا والطعم ممتاز والكمية كويسة أكيد هكرر الطلب تاني",
-  },
-  {
-    name: "سارة",
-    username: "@demo_sara",
-    initial: "س",
-    text: "الأكل وصل مرتب وساخن وطعمه كان ممتاز والطلب كان سهل جدًا تجربة لطيفة فعلًا",
-  },
-];
+import { restaurantConfig } from "@/src/data/restaurant";
 
 export default function Reviews() {
   return (
@@ -36,7 +22,7 @@ export default function Reviews() {
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {reviews.map((review) => (
+          {restaurantConfig.reviews.map((review) => (
             <article
               key={review.username}
               className="rounded-2xl border border-(--line) bg-(--surface) p-4 sm:p-5"
