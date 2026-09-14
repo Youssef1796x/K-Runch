@@ -95,29 +95,33 @@ export default function CartSummary({
         const lines = group.lines
           .map((line) => {
             const option = line.optionLabel
-              ? `${line.optionLabel} × `
+              ? ` · ${line.optionLabel}`
               : "";
 
             const lineTotal = line.price * line.quantity;
 
-            return `- ${option}${line.quantity} = ${lineTotal} جنيه`;
+            return `${option ? `${line.optionLabel} × ` : ""}${line.quantity} = ${lineTotal} جنيه`;
           })
           .join("\n");
 
-        return `${group.item.name}\n${lines}`;
+        return `*${group.item.name}*\n${lines}`;
       })
       .join("\n\n");
 
     const message = [
-      `طلب جديد من ${restaurantConfig.name}`,
-      `🕒 الساعة ${currentTime}`,
+      `*طلب جديد من ${restaurantConfig.name}*`,
+      "",
+      `🕒 الساعة: ${currentTime}`,
+      "",
+      "🛒 *الطلب*",
       "",
       orderLines,
       "",
-      `💰 الإجمالي: ${totalPrice} جنيه`,
+      `💰 *الإجمالي: ${totalPrice} جنيه*`,
     ].join("\n");
 
     const whatsappNumber = `20${restaurantConfig.location.whatsapp.slice(1)}`;
+
     const whatsappUrl =
       `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
@@ -140,10 +144,14 @@ export default function CartSummary({
           className="flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border border-(--accent) bg-(--surface) px-4 py-3 text-right shadow-[0_14px_36px_rgba(0,0,0,0.28)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
           aria-haspopup="dialog"
           aria-expanded={isOpen}
+          aria-label="مراجعة الطلب"
         >
-          <span className="flex items-center gap-2 text-sm font-bold text-(--ink)">
+          <span className="flex items-center text-sm font-bold text-(--ink)">
             <ShoppingBag size={18} aria-hidden="true" />
-            السلة ({totalQuantity})
+
+            <span className="mr-2">راجع طلبك</span>
+
+            <span className="mr-6">({totalQuantity}) أصناف</span>
           </span>
 
           <span className="text-sm font-bold text-(--accent)">
@@ -157,7 +165,7 @@ export default function CartSummary({
           className="fixed inset-0 z-90 bg-black/60 p-4"
           role="dialog"
           aria-modal="true"
-          aria-label="السلة"
+          aria-label="مراجعة الطلب"
           onClick={() => setIsOpen(false)}
         >
           <div
