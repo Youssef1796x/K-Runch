@@ -8,42 +8,64 @@ type CartSummaryProps = {
   items: MenuItem[];
   quantities: Record<string, number>;
   selectedOptions: Record<string, string>;
-  onDecrease: (itemId: string) => void;
-  onIncrease: (itemId: string) => void;
+  onDecrease: (itemId: string, optionLabel?: string) => void;
+  onIncrease: (itemId: string, optionLabel?: string) => void;
 };
+
+type CartLine = {
+  item: MenuItem;
+  optionLabel?: string;
+  price: number;
+  quantity: number;
+};
+
+const getQuantityKey = (itemId: string, optionLabel?: string) =>
+  optionLabel ? `${itemId}::${optionLabel}` : itemId;
 
 export default function CartSummary({
   items,
   quantities,
-  selectedOptions,
   onDecrease,
   onIncrease,
 }: CartSummaryProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const selectedItems = items.filter((item) => (quantities[item.id] ?? 0) > 0);
+  const cartLines: CartLine[] = items.flatMap((item) => {
+    if (item.priceOptions?.length) {
+      return item.priceOptions
+        .map((option) => ({
+          item,
+          optionLabel: option.label,
+          price: option.price,
+          quantity: quantities[getQuantityKey(item.id, option.label)] ?? 0,
+        }))
+        .filter((line) => line.quantity > 0);
+    }
 
-  const getSelectedPrice = (item: MenuItem) => {
-    if (item.price !== undefined) return item.price;
+    const quantity = quantities[item.id] ?? 0;
 
-    const selectedLabel =
-      selectedOptions[item.id] ?? item.priceOptions?.[0]?.label;
-    return item.priceOptions?.find((option) => option.label === selectedLabel)?.price ?? 0;
-  };
+    return quantity > 0
+      ? [
+          {
+            item,
+            price: item.price ?? 0,
+            quantity,
+          },
+        ]
+      : [];
+  });
 
-  const getSelectedLabel = (item: MenuItem) =>
-    selectedOptions[item.id] ?? item.priceOptions?.[0]?.label;
-
-  const totalQuantity = selectedItems.reduce(
-    (total, item) => total + (quantities[item.id] ?? 0),
+  const totalQuantity = cartLines.reduce(
+    (total, line) => total + line.quantity,
     0,
   );
-  const totalPrice = selectedItems.reduce(
-    (total, item) => total + getSelectedPrice(item) * (quantities[item.id] ?? 0),
+
+  const totalPrice = cartLines.reduce(
+    (total, line) => total + line.price * line.quantity,
     0,
   );
 
-  if (selectedItems.length === 0) return null;
+  if (cartLines.length === 0) return null;
 
   return (
     <>
@@ -92,26 +114,27 @@ export default function CartSummary({
             </div>
 
             <div className="divide-y divide-(--line)">
-              {selectedItems.map((item) => {
-                const quantity = quantities[item.id] ?? 0;
-                const selectedLabel = getSelectedLabel(item);
-                const selectedPrice = getSelectedPrice(item);
+              {cartLines.map((line) => {
+                const { item, optionLabel, price, quantity } = line;
 
                 return (
-                  <div key={item.id} className="flex items-center gap-3 py-3">
+                  <div
+                    key={`${item.id}-${optionLabel ?? "default"}`}
+                    className="flex items-center gap-3 py-3"
+                  >
                     <div className="min-w-0 flex-1">
                       <h3 className="text-sm font-bold text-(--ink)">{item.name}</h3>
                       <p className="mt-1 text-xs text-(--ink-soft)">
-                        {selectedLabel ? `${selectedLabel} · ` : ""}
-                        {selectedPrice} جنيه × {quantity}
+                        {optionLabel ? `${optionLabel} · ` : ""}
+                        {price} جنيه × {quantity}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-1 rounded-lg border border-(--line) p-1">
                       <button
                         type="button"
-                        onClick={() => onIncrease(item.id)}
-                        aria-label={`زود ${item.name}`}
+                        onClick={() => onIncrease(item.id, optionLabel)}
+                        aria-label={`زود ${item.name}${optionLabel ? ` - ${optionLabel}` : ""}`}
                         className="flex size-8 items-center justify-center rounded-md text-base font-bold text-(--ink) hover:bg-(--accent-glow)"
                       >
                         +
@@ -121,8 +144,8 @@ export default function CartSummary({
                       </span>
                       <button
                         type="button"
-                        onClick={() => onDecrease(item.id)}
-                        aria-label={`قلل ${item.name}`}
+                        onClick={() => onDecrease(item.id, optionLabel)}
+                        aria-label={`قلل ${item.name}${optionLabel ? ` - ${optionLabel}` : ""}`}
                         className="flex size-8 items-center justify-center rounded-md text-base font-bold text-(--ink) hover:bg-(--accent-glow)"
                       >
                         −
