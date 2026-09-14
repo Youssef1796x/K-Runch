@@ -196,6 +196,12 @@ export default function CartSummary({
     const message = [
       `${rtlMark}*طلب جديد من ${restaurantConfig.name}*`,
       "",
+      `${rtlMark}*الطلب:*`,
+      "",
+      orderLines,
+      "",
+      `${rtlMark}💰 *الإجمالي: ${totalPrice} جنيه*`,
+      "",
       `${rtlMark}🕐 *الوقت* ${currentTime}`,
       "",
       `${rtlMark}*العميل:*`,
@@ -209,12 +215,6 @@ export default function CartSummary({
           ]
         : []),
       ...(customer.notes.trim() ? [`${rtlMark}ملاحظات: ${customer.notes.trim()}`] : []),
-      "",
-      `${rtlMark}*الطلب:*`,
-      "",
-      orderLines,
-      "",
-      `${rtlMark}💰 *الإجمالي: ${totalPrice} جنيه*`,
     ].join("\n");
 
     const whatsappNumber = `20${restaurantConfig.location.whatsapp.slice(1)}`;
