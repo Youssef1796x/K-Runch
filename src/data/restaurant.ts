@@ -1,3 +1,10 @@
+export type RestaurantReview = {
+  name: string;
+  username: string;
+  initial: string;
+  text: string;
+};
+
 export type RestaurantConfig = {
   name: string;
   tagline: string;
@@ -29,6 +36,8 @@ export type RestaurantConfig = {
   socials: {
     facebook: string;
   };
+
+  reviews: RestaurantReview[];
 
   footer: {
     name: string;
@@ -67,6 +76,21 @@ export const restaurantConfig: RestaurantConfig = {
   socials: {
     facebook: "https://www.facebook.com/profile.php?id=61593270965881",
   },
+
+  reviews: [
+    {
+      name: "كريم",
+      username: "@demo_kareem",
+      initial: "ك",
+      text: "جربت الأكل وكانت التجربة حلوة جدًا والطعم ممتاز والكمية كويسة أكيد هكرر الطلب تاني",
+    },
+    {
+      name: "سارة",
+      username: "@demo_sara",
+      initial: "س",
+      text: "الأكل وصل مرتب وساخن وطعمه كان ممتاز والطلب كان سهل جدًا تجربة لطيفة فعلًا",
+    },
+  ],
 
   footer: {
     name: "K & Runch",
