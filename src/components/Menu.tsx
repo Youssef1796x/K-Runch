@@ -137,8 +137,11 @@ export default function Menu() {
               <button
                 key={category.id}
                 type="button"
+                id={`menu-tab-${category.id}`}
                 role="tab"
                 aria-selected={isActive}
+                aria-controls={`menu-panel-${category.id}`}
+                tabIndex={isActive ? 0 : -1}
                 onClick={() => handleCategoryChange(category.id)}
                 className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent) ${
                   isActive
@@ -154,7 +157,17 @@ export default function Menu() {
 
         <div
           className="mt-8"
+          id={
+            activeCategoryId
+              ? `menu-panel-${activeCategoryId}`
+              : "menu-panel-all"
+          }
           role="tabpanel"
+          aria-labelledby={
+            activeCategoryId
+              ? `menu-tab-${activeCategoryId}`
+              : undefined
+          }
           aria-label={activeCategory?.name ?? "كل الأصناف"}
         >
           <div className="grid gap-4">
