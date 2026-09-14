@@ -4,7 +4,6 @@ import { MessageCircle, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import type { MenuItem } from "@/src/data/menu";
 import { restaurantConfig } from "@/src/data/restaurant";
-import { createOrderReceiptImage } from "@/src/utils/createOrderReceiptImage";
 
 type CartSummaryProps = {
   items: MenuItem[];
@@ -38,7 +37,6 @@ export default function CartSummary({
   onClear,
 }: CartSummaryProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSending, setIsSending] = useState(false);
 
   const cartLines: CartLine[] = items.flatMap((item) => {
     if (item.priceOptions?.length) {
@@ -86,11 +84,7 @@ export default function CartSummary({
     0,
   );
 
-  const handleWhatsAppOrder = async () => {
-    if (isSending) return;
-
-    setIsSending(true);
-
+  const handleWhatsAppOrder = () => {
     const currentTime = new Date().toLocaleTimeString("ar-EG", {
       hour: "numeric",
       minute: "2-digit",
@@ -110,7 +104,7 @@ export default function CartSummary({
           })
           .join("\n");
 
-        return `*${lines}*`;
+        return lines;
       })
       .join("\n\n");
 
@@ -130,56 +124,7 @@ export default function CartSummary({
     const whatsappUrl =
       `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-    try {
-      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-      if (isMobile && navigator.share) {
-        const receiptBlob = await createOrderReceiptImage({
-          restaurantName: restaurantConfig.name,
-          time: currentTime,
-          groups: cartGroups.map((group) => ({
-            itemName: group.item.name,
-            lines: group.lines.map((line) => ({
-              itemName: line.item.name,
-              optionLabel: line.optionLabel,
-              quantity: line.quantity,
-              lineTotal: line.price * line.quantity,
-            })),
-          })),
-          totalPrice,
-        });
-
-        const receiptFile = new File(
-          [receiptBlob],
-          "k-runch-order.png",
-          { type: "image/png" },
-        );
-
-        const canShareReceipt =
-          typeof navigator.canShare === "function" &&
-          navigator.canShare({ files: [receiptFile] });
-
-        if (canShareReceipt) {
-          try {
-            await navigator.share({
-              files: [receiptFile],
-              text: message,
-              title: `طلب من ${restaurantConfig.name}`,
-            });
-
-            return;
-          } catch (error) {
-            if (error instanceof DOMException && error.name === "AbortError") {
-              return;
-            }
-          }
-        }
-      }
-
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-    } finally {
-      setIsSending(false);
-    }
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleClearCart = () => {
@@ -202,9 +147,7 @@ export default function CartSummary({
         >
           <span className="flex items-center text-sm font-bold text-(--ink)">
             <ShoppingBag size={18} aria-hidden="true" />
-
             <span className="mr-2">راجع طلبك</span>
-
             <span className="mr-6">({totalQuantity}) أصناف</span>
           </span>
 
@@ -231,7 +174,6 @@ export default function CartSummary({
                 <h2 className="text-xl font-bold text-(--ink)">
                   سلة الطلب
                 </h2>
-
                 <p className="mt-1 text-sm text-(--ink-soft)">
                   {totalQuantity} صنف
                 </p>
@@ -271,8 +213,7 @@ export default function CartSummary({
                             )}
 
                             <p className="mt-1 text-xs text-(--ink-soft)">
-                              {line.price} جنيه × {line.quantity} ={" "}
-                              {lineTotal} جنيه
+                              {line.price} جنيه × {line.quantity} = {lineTotal} جنيه
                             </p>
                           </div>
 
@@ -324,7 +265,6 @@ export default function CartSummary({
                 <span className="text-sm font-semibold text-(--ink-soft)">
                   الإجمالي
                 </span>
-
                 <span className="text-lg font-bold text-(--ink)">
                   {totalPrice} جنيه
                 </span>
@@ -333,12 +273,10 @@ export default function CartSummary({
               <button
                 type="button"
                 onClick={handleWhatsAppOrder}
-                disabled={isSending}
-                aria-busy={isSending}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-(--accent) px-4 py-3.5 text-sm font-bold text-(--surface) shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent) motion-safe:animate-[pulse_3s_ease-in-out_infinite] disabled:pointer-events-none disabled:opacity-70 disabled:motion-safe:animate-none"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-(--accent) px-4 py-3.5 text-sm font-bold text-(--surface) shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
               >
                 <MessageCircle size={19} aria-hidden="true" />
-                {isSending ? "جاري تجهيز الطلب..." : "اطلب على واتساب"}
+                اطلب على واتساب
               </button>
 
               {onClear && (
