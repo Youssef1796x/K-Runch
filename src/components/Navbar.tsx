@@ -9,6 +9,7 @@ const navLinks = [
   { id: "hero", label: "الرئيسية" },
   { id: "menu", label: "المنيو" },
   { id: "about", label: "عن المطعم" },
+  { id: "reviews", label: "آراء الناس" },
   { id: "location", label: "موقعنا" },
 ];
 
