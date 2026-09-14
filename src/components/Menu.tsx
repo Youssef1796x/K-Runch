@@ -25,6 +25,9 @@ const mixedMenuItems = Array.from({ length: maxItemsInCategory }, (_, index) =>
 
 const visibleSteps = [6, 20, 40];
 
+const getQuantityKey = (itemId: string, optionLabel?: string) =>
+  optionLabel ? `${itemId}::${optionLabel}` : itemId;
+
 export default function Menu() {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
@@ -36,13 +39,22 @@ export default function Menu() {
   const getDefaultOptionLabel = (itemId: string) =>
     menuItems.find((item) => item.id === itemId)?.priceOptions?.[0]?.label;
 
-  const updateQuantity = (itemId: string, change: number) => {
+  const getCurrentOptionLabel = (itemId: string) =>
+    getSelectedOptionLabel(itemId) ?? getDefaultOptionLabel(itemId);
+
+  const updateQuantity = (
+    itemId: string,
+    change: number,
+    optionLabel?: string,
+  ) => {
+    const quantityKey = getQuantityKey(itemId, optionLabel);
+
     setQuantities((current) => {
-      const nextQuantity = Math.max(0, (current[itemId] ?? 0) + change);
+      const nextQuantity = Math.max(0, (current[quantityKey] ?? 0) + change);
 
       return {
         ...current,
-        [itemId]: nextQuantity,
+        [quantityKey]: nextQuantity,
       };
     });
   };
@@ -135,21 +147,28 @@ export default function Menu() {
           aria-label={activeCategory?.name ?? "كل الأصناف"}
         >
           <div className="grid gap-4">
-            {visibleItems.map((item) => (
-              <MenuItemCard
-                key={item.id}
-                item={item}
-                quantity={quantities[item.id] ?? 0}
-                selectedOptionLabel={
-                  getSelectedOptionLabel(item.id) ??
-                  getDefaultOptionLabel(item.id)
-                }
-                onSelectOption={(label) => selectOption(item.id, label)}
-                onAdd={() => updateQuantity(item.id, 1)}
-                onDecrease={() => updateQuantity(item.id, -1)}
-                onIncrease={() => updateQuantity(item.id, 1)}
-              />
-            ))}
+            {visibleItems.map((item) => {
+              const selectedOptionLabel = getCurrentOptionLabel(item.id);
+              const quantity =
+                quantities[getQuantityKey(item.id, selectedOptionLabel)] ?? 0;
+
+              return (
+                <MenuItemCard
+                  key={item.id}
+                  item={item}
+                  quantity={quantity}
+                  selectedOptionLabel={selectedOptionLabel}
+                  onSelectOption={(label) => selectOption(item.id, label)}
+                  onAdd={() => updateQuantity(item.id, 1, selectedOptionLabel)}
+                  onDecrease={() =>
+                    updateQuantity(item.id, -1, selectedOptionLabel)
+                  }
+                  onIncrease={() =>
+                    updateQuantity(item.id, 1, selectedOptionLabel)
+                  }
+                />
+              );
+            })}
           </div>
 
           {hasMoreItems ? (
@@ -170,8 +189,12 @@ export default function Menu() {
         items={menuItems}
         quantities={quantities}
         selectedOptions={selectedOptions}
-        onDecrease={(itemId) => updateQuantity(itemId, -1)}
-        onIncrease={(itemId) => updateQuantity(itemId, 1)}
+        onDecrease={(itemId, optionLabel) =>
+          updateQuantity(itemId, -1, optionLabel)
+        }
+        onIncrease={(itemId, optionLabel) =>
+          updateQuantity(itemId, 1, optionLabel)
+        }
       />
     </section>
   );
