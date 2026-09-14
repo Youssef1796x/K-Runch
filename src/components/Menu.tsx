@@ -23,13 +23,13 @@ const mixedMenuItems = Array.from({ length: maxItemsInCategory }, (_, index) =>
     .filter((item): item is (typeof menuItems)[number] => Boolean(item)),
 ).flat();
 
-const initialVisibleCount = 6;
+const visibleSteps = [6, 20, 40];
 
 export default function Menu() {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
-  const [showAllItems, setShowAllItems] = useState(false);
+  const [visibleStep, setVisibleStep] = useState(0);
 
   const getSelectedOptionLabel = (itemId: string) => selectedOptions[itemId];
 
@@ -62,14 +62,25 @@ export default function Menu() {
     ? menuItems.filter((item) => item.category === activeCategoryId)
     : mixedMenuItems;
 
-  const hasMoreItems = !activeCategoryId && filteredItems.length > initialVisibleCount;
-  const visibleItems = showAllItems || !hasMoreItems
+  const visibleCount =
+    visibleSteps[visibleStep] ?? filteredItems.length;
+
+  const hasMoreItems =
+    !activeCategoryId && visibleCount < filteredItems.length;
+
+  const visibleItems = activeCategoryId
     ? filteredItems
-    : filteredItems.slice(0, initialVisibleCount);
+    : filteredItems.slice(0, visibleCount);
 
   const handleCategoryChange = (categoryId: string) => {
-    setShowAllItems(false);
-    setActiveCategoryId((current) => (current === categoryId ? null : categoryId));
+    setVisibleStep(0);
+    setActiveCategoryId((current) =>
+      current === categoryId ? null : categoryId,
+    );
+  };
+
+  const handleShowMore = () => {
+    setVisibleStep((current) => current + 1);
   };
 
   return (
@@ -130,7 +141,8 @@ export default function Menu() {
                 item={item}
                 quantity={quantities[item.id] ?? 0}
                 selectedOptionLabel={
-                  getSelectedOptionLabel(item.id) ?? getDefaultOptionLabel(item.id)
+                  getSelectedOptionLabel(item.id) ??
+                  getDefaultOptionLabel(item.id)
                 }
                 onSelectOption={(label) => selectOption(item.id, label)}
                 onAdd={() => updateQuantity(item.id, 1)}
@@ -144,11 +156,10 @@ export default function Menu() {
             <div className="mt-6 flex justify-center">
               <button
                 type="button"
-                onClick={() => setShowAllItems((current) => !current)}
-                aria-expanded={showAllItems}
+                onClick={handleShowMore}
                 className="rounded-full border border-(--line) bg-(--surface) px-5 py-2.5 text-sm font-semibold text-(--ink) transition-colors hover:border-(--accent) hover:text-(--accent) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
               >
-                {showAllItems ? "عرض أقل" : "عرض المزيد"}
+                عرض المزيد
               </button>
             </div>
           ) : null}

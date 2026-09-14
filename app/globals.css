@@ -118,10 +118,30 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
 .menu-category-tabs::-webkit-scrollbar {
   display: none;
-  width: 0;
-  height: 0;
+}
+
+@media (min-width: 1024px) {
+  .menu-category-tabs {
+    scrollbar-width: thin;
+    -ms-overflow-style: auto;
+  }
+
+  .menu-category-tabs::-webkit-scrollbar {
+    display: block;
+    height: 6px;
+  }
+
+  .menu-category-tabs::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 9999px;
+  }
+
+  .menu-category-tabs::-webkit-scrollbar-track {
+    background: transparent;
+  }
 }
 
 /* === Footer === */
