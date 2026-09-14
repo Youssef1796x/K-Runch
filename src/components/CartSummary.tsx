@@ -4,6 +4,7 @@ import { MessageCircle, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import type { MenuItem } from "@/src/data/menu";
 import { restaurantConfig } from "@/src/data/restaurant";
+import { createOrderReceiptImage } from "@/src/utils/createOrderReceiptImage";
 
 type CartSummaryProps = {
   items: MenuItem[];
@@ -37,6 +38,7 @@ export default function CartSummary({
   onClear,
 }: CartSummaryProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   const cartLines: CartLine[] = items.flatMap((item) => {
     if (item.priceOptions?.length) {
@@ -84,7 +86,11 @@ export default function CartSummary({
     0,
   );
 
-  const handleWhatsAppOrder = () => {
+  const handleWhatsAppOrder = async () => {
+    if (isSending) return;
+
+    setIsSending(true);
+
     const currentTime = new Date().toLocaleTimeString("ar-EG", {
       hour: "numeric",
       minute: "2-digit",
@@ -95,25 +101,25 @@ export default function CartSummary({
         const lines = group.lines
           .map((line) => {
             const option = line.optionLabel
-              ? ` · ${line.optionLabel}`
+              ? ` — ${line.optionLabel}`
               : "";
 
             const lineTotal = line.price * line.quantity;
 
-            return `${option ? `${line.optionLabel} × ` : ""}${line.quantity} = ${lineTotal} جنيه`;
+            return `${group.item.name}${option} × ${line.quantity} = ${lineTotal} جنيه`;
           })
           .join("\n");
 
-        return `*${group.item.name}*\n${lines}`;
+        return `*${lines}*`;
       })
       .join("\n\n");
 
     const message = [
       `*طلب جديد من ${restaurantConfig.name}*`,
       "",
-      `🕒 الساعة: ${currentTime}`,
+      `*الوقت:* ${currentTime}`,
       "",
-      "🛒 *الطلب*",
+      "*الطلب:*",
       "",
       orderLines,
       "",
@@ -121,11 +127,59 @@ export default function CartSummary({
     ].join("\n");
 
     const whatsappNumber = `20${restaurantConfig.location.whatsapp.slice(1)}`;
-
     const whatsappUrl =
       `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    try {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      if (isMobile && navigator.share) {
+        const receiptBlob = await createOrderReceiptImage({
+          restaurantName: restaurantConfig.name,
+          time: currentTime,
+          groups: cartGroups.map((group) => ({
+            itemName: group.item.name,
+            lines: group.lines.map((line) => ({
+              itemName: line.item.name,
+              optionLabel: line.optionLabel,
+              quantity: line.quantity,
+              lineTotal: line.price * line.quantity,
+            })),
+          })),
+          totalPrice,
+        });
+
+        const receiptFile = new File(
+          [receiptBlob],
+          "k-runch-order.png",
+          { type: "image/png" },
+        );
+
+        const canShareReceipt =
+          typeof navigator.canShare === "function" &&
+          navigator.canShare({ files: [receiptFile] });
+
+        if (canShareReceipt) {
+          try {
+            await navigator.share({
+              files: [receiptFile],
+              text: message,
+              title: `طلب من ${restaurantConfig.name}`,
+            });
+
+            return;
+          } catch (error) {
+            if (error instanceof DOMException && error.name === "AbortError") {
+              return;
+            }
+          }
+        }
+      }
+
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleClearCart = () => {
@@ -279,10 +333,12 @@ export default function CartSummary({
               <button
                 type="button"
                 onClick={handleWhatsAppOrder}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-(--accent) px-4 py-3.5 text-sm font-bold text-(--surface) shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent) motion-safe:animate-[pulse_3s_ease-in-out_infinite]"
+                disabled={isSending}
+                aria-busy={isSending}
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-(--accent) px-4 py-3.5 text-sm font-bold text-(--surface) shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent) motion-safe:animate-[pulse_3s_ease-in-out_infinite] disabled:pointer-events-none disabled:opacity-70 disabled:motion-safe:animate-none"
               >
                 <MessageCircle size={19} aria-hidden="true" />
-                اطلب على واتساب
+                {isSending ? "جاري تجهيز الطلب..." : "اطلب على واتساب"}
               </button>
 
               {onClear && (
