@@ -102,8 +102,8 @@ export default function CartSummary({
             }
 
             return line.quantity === 1
-              ? `${rtlMark}${line.item.name} · ${lineTotal} جنيه`
-              : `${rtlMark}${line.item.name} × ${line.quantity} = ${lineTotal} جنيه`;
+              ? `${rtlMark}*${line.item.name}*  •  ${lineTotal} جنيه`
+              : `${rtlMark}*${line.item.name}* × ${line.quantity} = ${lineTotal} جنيه`;
           })
           .join("\n");
 
@@ -120,7 +120,7 @@ export default function CartSummary({
       "",
       `${rtlMark}🕐 *الوقت:* ${currentTime}`,
       "",
-      `${rtlMark}🛒 *الطلب:*`,
+      `${rtlMark}*الطلب:*`,
       "",
       orderLines,
       "",
