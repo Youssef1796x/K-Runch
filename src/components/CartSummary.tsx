@@ -8,7 +8,6 @@ import { restaurantConfig } from "@/src/data/restaurant";
 type CartSummaryProps = {
   items: MenuItem[];
   quantities: Record<string, number>;
-  selectedOptions?: Record<string, string>;
   onDecrease: (itemId: string, optionLabel?: string) => void;
   onIncrease: (itemId: string, optionLabel?: string) => void;
   onClear?: () => void;
