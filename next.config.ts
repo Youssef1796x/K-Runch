@@ -7,6 +7,13 @@ const nextConfig: NextConfig = {
 
   images: {
     qualities: [60, 65, 75],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "commons.wikimedia.org",
+        pathname: "/wiki/Special:Redirect/file/**",
+      },
+    ],
   },
 };
 
