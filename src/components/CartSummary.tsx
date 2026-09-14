@@ -480,7 +480,7 @@ export default function CartSummary({
                           id="checkout-address"
                           value={customer.address}
                           onChange={(event) => updateCustomer("address", event.target.value)}
-                          placeholder="اكتب عنوان التوصيل بالتفصيل"
+                          placeholder="اكتب عنوانك"
                           autoComplete="street-address"
                           rows={3}
                           className="mt-2 w-full resize-none rounded-xl border border-(--line) bg-background px-4 py-3 text-sm leading-6 text-(--ink) outline-none transition-colors placeholder:text-(--ink-muted) focus:border-(--accent)"
@@ -491,7 +491,7 @@ export default function CartSummary({
                           className="mt-2 inline-flex items-center gap-2 rounded-lg border border-(--line) px-3 py-2 text-xs font-bold text-(--ink-soft) transition-colors hover:border-(--accent) hover:text-(--ink) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
                         >
                           <MapPin size={15} aria-hidden="true" />
-                          {customer.locationUrl ? "تم تحديد الموقع" : "تحديد موقعي"}
+                          {customer.locationUrl ? "تم تحديث الموقع" : "تحديد موقعي"}
                         </button>
                       </div>
                     ) : null}
@@ -503,7 +503,6 @@ export default function CartSummary({
                         id="checkout-notes"
                         value={customer.notes}
                         onChange={(event) => updateCustomer("notes", event.target.value)}
-                        placeholder="مثلاً: من غير بصل"
                         rows={2}
                         className="mt-2 w-full resize-none rounded-xl border border-(--line) bg-background px-4 py-3 text-sm leading-6 text-(--ink) outline-none transition-colors placeholder:text-(--ink-muted) focus:border-(--accent)"
                       />
