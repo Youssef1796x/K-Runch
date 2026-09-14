@@ -1,15 +1,17 @@
 "use client";
 
-import { ShoppingBag, X } from "lucide-react";
+import { MessageCircle, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import type { MenuItem } from "@/src/data/menu";
+import { restaurantConfig } from "@/src/data/restaurant";
 
 type CartSummaryProps = {
   items: MenuItem[];
   quantities: Record<string, number>;
-  selectedOptions: Record<string, string>;
+  selectedOptions?: Record<string, string>;
   onDecrease: (itemId: string, optionLabel?: string) => void;
   onIncrease: (itemId: string, optionLabel?: string) => void;
+  onClear?: () => void;
 };
 
 type CartLine = {
@@ -32,6 +34,7 @@ export default function CartSummary({
   quantities,
   onDecrease,
   onIncrease,
+  onClear,
 }: CartSummaryProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -60,13 +63,16 @@ export default function CartSummary({
       : [];
   });
 
-  const cartGroups: CartGroup[] = items.reduce<CartGroup[]>((groups, item) => {
-    const lines = cartLines.filter((line) => line.item.id === item.id);
+  const cartGroups: CartGroup[] = items.reduce<CartGroup[]>(
+    (groups, item) => {
+      const lines = cartLines.filter((line) => line.item.id === item.id);
 
-    if (lines.length === 0) return groups;
+      if (lines.length === 0) return groups;
 
-    return [...groups, { item, lines }];
-  }, []);
+      return [...groups, { item, lines }];
+    },
+    [],
+  );
 
   const totalQuantity = cartLines.reduce(
     (total, line) => total + line.quantity,
@@ -77,6 +83,51 @@ export default function CartSummary({
     (total, line) => total + line.price * line.quantity,
     0,
   );
+
+  const handleWhatsAppOrder = () => {
+    const currentTime = new Date().toLocaleTimeString("ar-EG", {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+
+    const orderLines = cartGroups
+      .map((group) => {
+        const lines = group.lines
+          .map((line) => {
+            const option = line.optionLabel
+              ? `${line.optionLabel} × `
+              : "";
+
+            const lineTotal = line.price * line.quantity;
+
+            return `- ${option}${line.quantity} = ${lineTotal} جنيه`;
+          })
+          .join("\n");
+
+        return `${group.item.name}\n${lines}`;
+      })
+      .join("\n\n");
+
+    const message = [
+      `طلب جديد من ${restaurantConfig.name}`,
+      `🕒 الساعة ${currentTime}`,
+      "",
+      orderLines,
+      "",
+      `💰 الإجمالي: ${totalPrice} جنيه`,
+    ].join("\n");
+
+    const whatsappNumber = `20${restaurantConfig.location.whatsapp.slice(1)}`;
+    const whatsappUrl =
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  };
+
+  const handleClearCart = () => {
+    onClear?.();
+    setIsOpen(false);
+  };
 
   if (cartLines.length === 0) return null;
 
@@ -94,7 +145,10 @@ export default function CartSummary({
             <ShoppingBag size={18} aria-hidden="true" />
             السلة ({totalQuantity})
           </span>
-          <span className="text-sm font-bold text-(--accent)">{totalPrice} جنيه</span>
+
+          <span className="text-sm font-bold text-(--accent)">
+            {totalPrice} جنيه
+          </span>
         </button>
       </div>
 
@@ -107,80 +161,131 @@ export default function CartSummary({
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="absolute inset-x-4 bottom-4 mx-auto max-h-[75vh] w-auto max-w-lg overflow-y-auto rounded-2xl border border-(--line) bg-(--surface) p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:left-1/2 sm:right-auto sm:w-full sm:-translate-x-1/2"
+            className="absolute inset-x-4 bottom-4 mx-auto max-h-[80vh] w-auto max-w-lg overflow-y-auto rounded-2xl border border-(--line) bg-(--surface) p-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:left-1/2 sm:right-auto sm:w-full sm:-translate-x-1/2"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-center justify-between gap-3 border-b border-(--line) pb-3">
+            <div className="flex items-center justify-between gap-3 border-b border-(--line) pb-4">
               <div>
-                <h2 className="text-lg font-bold text-(--ink)">السلة</h2>
-                <p className="mt-1 text-xs text-(--ink-soft)">{totalQuantity} صنف</p>
+                <h2 className="text-xl font-bold text-(--ink)">
+                  سلة الطلب
+                </h2>
+
+                <p className="mt-1 text-sm text-(--ink-soft)">
+                  {totalQuantity} صنف
+                </p>
               </div>
 
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
                 aria-label="إغلاق السلة"
-                className="inline-flex size-10 items-center justify-center rounded-full text-(--ink-soft) transition-colors hover:bg-(--accent-glow) hover:text-(--ink) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
+                className="inline-flex size-11 items-center justify-center rounded-full border border-(--line) text-(--ink) transition-colors hover:bg-(--accent-glow) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
               >
-                <X size={18} aria-hidden="true" />
+                <X size={22} strokeWidth={2.5} aria-hidden="true" />
               </button>
             </div>
 
             <div className="divide-y divide-(--line)">
               {cartGroups.map((group) => (
-                <div key={group.item.id} className="py-3">
-                  <h3 className="text-sm font-bold text-(--ink)">
+                <div key={group.item.id} className="py-4">
+                  <h3 className="text-base font-bold text-(--ink)">
                     {group.item.name}
                   </h3>
 
-                  <div className="mt-2 space-y-2">
-                    {group.lines.map((line) => (
-                      <div
-                        key={`${line.item.id}-${line.optionLabel ?? "default"}`}
-                        className="flex items-center gap-3"
-                      >
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xs text-(--ink-soft)">
-                            {line.optionLabel ? `${line.optionLabel} · ` : ""}
-                            {line.price} جنيه × {line.quantity}
-                          </p>
-                        </div>
+                  <div className="mt-3 space-y-3">
+                    {group.lines.map((line) => {
+                      const lineTotal = line.price * line.quantity;
 
-                        <div className="flex shrink-0 items-center gap-1 rounded-lg border border-(--line) p-1">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              onIncrease(line.item.id, line.optionLabel)
-                            }
-                            aria-label={`زود ${line.item.name}${line.optionLabel ? ` - ${line.optionLabel}` : ""}`}
-                            className="flex size-8 items-center justify-center rounded-md text-base font-bold text-(--ink) hover:bg-(--accent-glow)"
-                          >
-                            +
-                          </button>
-                          <span className="min-w-6 text-center text-sm font-bold text-(--ink)">
-                            {line.quantity}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              onDecrease(line.item.id, line.optionLabel)
-                            }
-                            aria-label={`قلل ${line.item.name}${line.optionLabel ? ` - ${line.optionLabel}` : ""}`}
-                            className="flex size-8 items-center justify-center rounded-md text-base font-bold text-(--ink) hover:bg-(--accent-glow)"
-                          >
-                            −
-                          </button>
+                      return (
+                        <div
+                          key={`${line.item.id}-${line.optionLabel ?? "default"}`}
+                          className="flex items-center gap-3"
+                        >
+                          <div className="min-w-0 flex-1">
+                            {line.optionLabel && (
+                              <p className="text-sm font-semibold text-(--ink)">
+                                {line.optionLabel}
+                              </p>
+                            )}
+
+                            <p className="mt-1 text-xs text-(--ink-soft)">
+                              {line.price} جنيه × {line.quantity} ={" "}
+                              {lineTotal} جنيه
+                            </p>
+                          </div>
+
+                          <div className="flex shrink-0 items-center gap-1 rounded-xl border border-(--line) p-1">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                onIncrease(line.item.id, line.optionLabel)
+                              }
+                              aria-label={`زود ${line.item.name}${
+                                line.optionLabel
+                                  ? ` - ${line.optionLabel}`
+                                  : ""
+                              }`}
+                              className="flex size-8 items-center justify-center rounded-lg text-base font-bold text-(--ink) transition-colors hover:bg-(--accent-glow)"
+                            >
+                              +
+                            </button>
+
+                            <span className="min-w-7 text-center text-sm font-bold text-(--ink)">
+                              {line.quantity}
+                            </span>
+
+                            <button
+                              type="button"
+                              onClick={() =>
+                                onDecrease(line.item.id, line.optionLabel)
+                              }
+                              aria-label={`قلل ${line.item.name}${
+                                line.optionLabel
+                                  ? ` - ${line.optionLabel}`
+                                  : ""
+                              }`}
+                              className="flex size-8 items-center justify-center rounded-lg text-base font-bold text-(--ink) transition-colors hover:bg-(--accent-glow)"
+                            >
+                              −
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-2 flex items-center justify-between border-t border-(--line) pt-4">
-              <span className="text-sm text-(--ink-soft)">الإجمالي</span>
-              <span className="text-base font-bold text-(--accent)">{totalPrice} جنيه</span>
+            <div className="mt-2 border-t border-(--line) pt-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-(--ink-soft)">
+                  الإجمالي
+                </span>
+
+                <span className="text-lg font-bold text-(--ink)">
+                  {totalPrice} جنيه
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleWhatsAppOrder}
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-(--accent) px-4 py-3.5 text-sm font-bold text-(--surface) shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent) motion-safe:animate-[pulse_3s_ease-in-out_infinite]"
+              >
+                <MessageCircle size={19} aria-hidden="true" />
+                اطلب على واتساب
+              </button>
+
+              {onClear && (
+                <button
+                  type="button"
+                  onClick={handleClearCart}
+                  className="mt-3 w-full rounded-xl px-4 py-2.5 text-sm font-semibold text-(--ink-soft) transition-colors hover:bg-(--accent-glow) hover:text-(--ink)"
+                >
+                  مسح السلة
+                </button>
+              )}
             </div>
           </div>
         </div>

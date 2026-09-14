@@ -7,7 +7,8 @@ import MenuItemCard from "@/src/components/MenuItemCard";
 
 const maxItemsInCategory = Math.max(
   ...menuCategories.map(
-    (category) => menuItems.filter((item) => item.category === category.id).length,
+    (category) =>
+      menuItems.filter((item) => item.category === category.id).length,
   ),
 );
 
@@ -17,7 +18,9 @@ const mixedMenuItems = Array.from({ length: maxItemsInCategory }, (_, index) =>
       menuItems.find(
         (item) =>
           item.category === category.id &&
-          menuItems.filter((candidate) => candidate.category === category.id).indexOf(item) === index,
+          menuItems.filter(
+            (candidate) => candidate.category === category.id,
+          ).indexOf(item) === index,
       ),
     )
     .filter((item): item is (typeof menuItems)[number] => Boolean(item)),
@@ -30,8 +33,12 @@ const getQuantityKey = (itemId: string, optionLabel?: string) =>
 
 export default function Menu() {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
-  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
-  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
+  const [selectedOptions, setSelectedOptions] = useState<
+    Record<string, string>
+  >({});
+  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(
+    null,
+  );
   const [visibleStep, setVisibleStep] = useState(0);
 
   const getSelectedOptionLabel = (itemId: string) => selectedOptions[itemId];
@@ -66,6 +73,11 @@ export default function Menu() {
     }));
   };
 
+  const handleClearCart = () => {
+    setQuantities({});
+    setSelectedOptions({});
+  };
+
   const activeCategory = menuCategories.find(
     (category) => category.id === activeCategoryId,
   );
@@ -74,8 +86,7 @@ export default function Menu() {
     ? menuItems.filter((item) => item.category === activeCategoryId)
     : mixedMenuItems;
 
-  const visibleCount =
-    visibleSteps[visibleStep] ?? filteredItems.length;
+  const visibleCount = visibleSteps[visibleStep] ?? filteredItems.length;
 
   const hasMoreItems =
     !activeCategoryId && visibleCount < filteredItems.length;
@@ -150,7 +161,9 @@ export default function Menu() {
             {visibleItems.map((item) => {
               const selectedOptionLabel = getCurrentOptionLabel(item.id);
               const quantity =
-                quantities[getQuantityKey(item.id, selectedOptionLabel)] ?? 0;
+                quantities[
+                  getQuantityKey(item.id, selectedOptionLabel)
+                ] ?? 0;
 
               return (
                 <MenuItemCard
@@ -159,7 +172,9 @@ export default function Menu() {
                   quantity={quantity}
                   selectedOptionLabel={selectedOptionLabel}
                   onSelectOption={(label) => selectOption(item.id, label)}
-                  onAdd={() => updateQuantity(item.id, 1, selectedOptionLabel)}
+                  onAdd={() =>
+                    updateQuantity(item.id, 1, selectedOptionLabel)
+                  }
                   onDecrease={() =>
                     updateQuantity(item.id, -1, selectedOptionLabel)
                   }
@@ -188,13 +203,13 @@ export default function Menu() {
       <CartSummary
         items={menuItems}
         quantities={quantities}
-        selectedOptions={selectedOptions}
         onDecrease={(itemId, optionLabel) =>
           updateQuantity(itemId, -1, optionLabel)
         }
         onIncrease={(itemId, optionLabel) =>
           updateQuantity(itemId, 1, optionLabel)
         }
+        onClear={handleClearCart}
       />
     </section>
   );
