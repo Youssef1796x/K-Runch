@@ -38,7 +38,7 @@ export default function Location() {
                     </p>
 
                     <a
-                      href="https://maps.app.goo.gl/8BxfrQCY8D8EwNABA"
+                      href={restaurantConfig.location.mapsUrl}
                       target="_blank"
                       rel="noreferrer"
                       className="mt-2 inline-block text-xs font-bold text-(--accent) hover:underline"
