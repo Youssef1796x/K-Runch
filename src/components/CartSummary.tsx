@@ -108,7 +108,7 @@ export default function CartSummary({
           .join("\n");
 
         if (group.lines.some((line) => line.optionLabel)) {
-          return `${rtlMark}${group.item.name}\n${lines}`;
+          return `${rtlMark}*${group.item.name}*\n${lines}`;
         }
 
         return lines;
@@ -118,7 +118,7 @@ export default function CartSummary({
     const message = [
       `${rtlMark}*طلب جديد من ${restaurantConfig.name}*`,
       "",
-      `${rtlMark}🕐 *الوقت:* ${currentTime}`,
+      `${rtlMark}🕐 *الوقت* ${currentTime}`,
       "",
       `${rtlMark}*الطلب:*`,
       "",
