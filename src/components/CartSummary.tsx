@@ -219,13 +219,7 @@ export default function CartSummary({
 
     const whatsappNumber = `20${restaurantConfig.location.whatsapp.slice(1)}`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-    const whatsappWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-
-    if (!whatsappWindow) {
-      setError("واتساب ما اتفتحش. اسمح بفتح النوافذ المنبثقة وحاول تاني.");
-      return;
-    }
-
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     setError("");
     setOrderSent(true);
   };
