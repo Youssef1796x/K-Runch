@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle, ShoppingBag, X } from "lucide-react";
+import { ArrowRight, MessageCircle, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import type { MenuItem } from "@/src/data/menu";
 import { restaurantConfig } from "@/src/data/restaurant";
@@ -25,8 +25,26 @@ type CartGroup = {
   lines: CartLine[];
 };
 
+type CheckoutStep = "cart" | "details" | "review";
+
+type CustomerDetails = {
+  name: string;
+  phone: string;
+  fulfillment: "delivery" | "pickup";
+  address: string;
+  notes: string;
+};
+
 const getQuantityKey = (itemId: string, optionLabel?: string) =>
   optionLabel ? `${itemId}::${optionLabel}` : itemId;
+
+const initialCustomerDetails: CustomerDetails = {
+  name: "",
+  phone: "",
+  fulfillment: "delivery",
+  address: "",
+  notes: "",
+};
 
 export default function CartSummary({
   items,
@@ -36,6 +54,11 @@ export default function CartSummary({
   onClear,
 }: CartSummaryProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [step, setStep] = useState<CheckoutStep>("cart");
+  const [customer, setCustomer] = useState<CustomerDetails>(
+    initialCustomerDetails,
+  );
+  const [error, setError] = useState("");
 
   const cartLines: CartLine[] = items.flatMap((item) => {
     if (item.priceOptions?.length) {
@@ -83,6 +106,75 @@ export default function CartSummary({
     0,
   );
 
+  const resetCheckout = () => {
+    setStep("cart");
+    setError("");
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+    resetCheckout();
+  };
+
+  const openModal = () => {
+    setIsOpen(true);
+    resetCheckout();
+  };
+
+  const updateCustomer = <K extends keyof CustomerDetails>(
+    key: K,
+    value: CustomerDetails[K],
+  ) => {
+    setCustomer((current) => ({
+      ...current,
+      [key]: value,
+    }));
+    setError("");
+  };
+
+  const validateDetails = () => {
+    const trimmedName = customer.name.trim();
+    const normalizedPhone = customer.phone.replace(/\s+/g, "");
+
+    if (trimmedName.length < 2) {
+      setError("اكتب اسمك عشان نعرف الطلب باسم مين.");
+      return false;
+    }
+
+    if (!/^01\d{9}$/.test(normalizedPhone)) {
+      setError("اكتب رقم موبايل مصري صحيح من 11 رقم.");
+      return false;
+    }
+
+    if (
+      customer.fulfillment === "delivery" &&
+      customer.address.trim().length < 5
+    ) {
+      setError("اكتب عنوان التوصيل بالتفصيل.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleNext = () => {
+    if (step === "cart") {
+      setStep("details");
+      setError("");
+      return;
+    }
+
+    if (step === "details" && validateDetails()) {
+      setStep("review");
+      setError("");
+    }
+  };
+
+  const handleBack = () => {
+    setError("");
+    setStep((current) => (current === "review" ? "details" : "cart"));
+  };
+
   const handleWhatsAppOrder = () => {
     const rtlMark = "\u200F";
     const currentTime = new Date().toLocaleTimeString("en-US", {
@@ -114,10 +206,24 @@ export default function CartSummary({
       })
       .join("\n\n");
 
+    const normalizedPhone = customer.phone.replace(/\s+/g, "");
     const message = [
       `${rtlMark}*طلب جديد من ${restaurantConfig.name}*`,
       "",
       `${rtlMark}🕐 *الوقت* ${currentTime}`,
+      "",
+      `${rtlMark}*العميل:*`,
+      `${rtlMark}الاسم: ${customer.name.trim()}`,
+      `${rtlMark}الهاتف: ${normalizedPhone}`,
+      `${rtlMark}الاستلام: ${
+        customer.fulfillment === "delivery" ? "توصيل" : "من المطعم"
+      }`,
+      ...(customer.fulfillment === "delivery"
+        ? [`${rtlMark}العنوان: ${customer.address.trim()}`]
+        : []),
+      ...(customer.notes.trim()
+        ? [`${rtlMark}ملاحظات: ${customer.notes.trim()}`]
+        : []),
       "",
       `${rtlMark}*الطلب:*`,
       "",
@@ -135,17 +241,25 @@ export default function CartSummary({
 
   const handleClearCart = () => {
     onClear?.();
-    setIsOpen(false);
+    setCustomer(initialCustomerDetails);
+    closeModal();
   };
 
   if (cartLines.length === 0) return null;
+
+  const stepTitle =
+    step === "cart"
+      ? "سلة الطلب"
+      : step === "details"
+        ? "بيانات الطلب"
+        : "راجع طلبك";
 
   return (
     <>
       <div className="fixed inset-x-4 bottom-4 z-40 sm:left-auto sm:right-6 sm:w-full sm:max-w-sm">
         <button
           type="button"
-          onClick={() => setIsOpen(true)}
+          onClick={openModal}
           className="flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border border-(--accent) bg-(--surface) px-4 py-3 text-right shadow-[0_14px_36px_rgba(0,0,0,0.28)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
           aria-haspopup="dialog"
           aria-expanded={isOpen}
@@ -169,132 +283,352 @@ export default function CartSummary({
           role="dialog"
           aria-modal="true"
           aria-label="مراجعة الطلب"
-          onClick={() => setIsOpen(false)}
+          onClick={closeModal}
         >
           <div
-            className="absolute inset-x-4 bottom-4 mx-auto max-h-[80vh] w-auto max-w-lg overflow-y-auto rounded-2xl border border-(--line) bg-(--surface) p-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:left-1/2 sm:right-auto sm:w-full sm:-translate-x-1/2"
+            className="absolute inset-x-4 bottom-4 mx-auto max-h-[86vh] w-auto max-w-lg overflow-y-auto rounded-2xl border border-(--line) bg-(--surface) p-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:left-1/2 sm:right-auto sm:w-full sm:-translate-x-1/2"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center justify-between gap-3 border-b border-(--line) pb-4">
               <div>
-                <h2 className="text-xl font-bold text-(--ink)">
-                  سلة الطلب
-                </h2>
+                <h2 className="text-xl font-bold text-(--ink)">{stepTitle}</h2>
                 <p className="mt-1 text-sm text-(--ink-soft)">
-                  {totalQuantity} صنف
+                  {step === "cart"
+                    ? `${totalQuantity} صنف`
+                    : step === "details"
+                      ? "خطوتين بسيطين ونبعت الطلب"
+                      : "راجع بياناتك قبل الإرسال"}
                 </p>
               </div>
 
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
-                aria-label="إغلاق السلة"
+                onClick={closeModal}
+                aria-label="إغلاق الطلب"
                 className="inline-flex size-11 items-center justify-center rounded-full border border-(--line) text-(--ink) transition-colors hover:bg-(--accent-glow) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
               >
                 <X size={22} strokeWidth={2.5} aria-hidden="true" />
               </button>
             </div>
 
-            <div className="divide-y divide-(--line)">
-              {cartGroups.map((group) => (
-                <div key={group.item.id} className="py-4">
-                  <h3 className="text-base font-bold text-(--ink)">
-                    {group.item.name}
-                  </h3>
+            <div className="mb-5 mt-4 flex items-center gap-2 text-xs font-bold text-(--ink-muted)">
+              <span className={step === "cart" ? "text-(--accent)" : ""}>
+                1 السلة
+              </span>
+              <span aria-hidden="true">←</span>
+              <span className={step === "details" ? "text-(--accent)" : ""}>
+                2 بياناتك
+              </span>
+              <span aria-hidden="true">←</span>
+              <span className={step === "review" ? "text-(--accent)" : ""}>
+                3 المراجعة
+              </span>
+            </div>
 
-                  <div className="mt-3 space-y-3">
-                    {group.lines.map((line) => {
-                      const lineTotal = line.price * line.quantity;
+            {step === "cart" ? (
+              <>
+                <div className="divide-y divide-(--line)">
+                  {cartGroups.map((group) => (
+                    <div key={group.item.id} className="py-4 first:pt-0">
+                      <h3 className="text-base font-bold text-(--ink)">
+                        {group.item.name}
+                      </h3>
 
-                      return (
-                        <div
-                          key={`${line.item.id}-${line.optionLabel ?? "default"}`}
-                          className="flex items-center gap-3"
-                        >
-                          <div className="min-w-0 flex-1">
-                            {line.optionLabel && (
-                              <p className="text-sm font-semibold text-(--ink)">
-                                {line.optionLabel}
-                              </p>
-                            )}
+                      <div className="mt-3 space-y-3">
+                        {group.lines.map((line) => {
+                          const lineTotal = line.price * line.quantity;
 
-                            <p className="mt-1 text-xs text-(--ink-soft)">
-                              {line.price} جنيه × {line.quantity} = {lineTotal} جنيه
-                            </p>
-                          </div>
-
-                          <div className="flex shrink-0 items-center gap-1 rounded-xl border border-(--line) p-1">
-                            <button
-                              type="button"
-                              onClick={() =>
-                                onIncrease(line.item.id, line.optionLabel)
-                              }
-                              aria-label={`زود ${line.item.name}${
-                                line.optionLabel
-                                  ? ` - ${line.optionLabel}`
-                                  : ""
-                              }`}
-                              className="flex size-8 items-center justify-center rounded-lg text-base font-bold text-(--ink) transition-colors hover:bg-(--accent-glow)"
+                          return (
+                            <div
+                              key={`${line.item.id}-${line.optionLabel ?? "default"}`}
+                              className="flex items-center gap-3"
                             >
-                              +
-                            </button>
+                              <div className="min-w-0 flex-1">
+                                {line.optionLabel && (
+                                  <p className="text-sm font-semibold text-(--ink)">
+                                    {line.optionLabel}
+                                  </p>
+                                )}
 
-                            <span className="min-w-7 text-center text-sm font-bold text-(--ink)">
-                              {line.quantity}
-                            </span>
+                                <p className="mt-1 text-xs text-(--ink-soft)">
+                                  {line.price} جنيه × {line.quantity} = {lineTotal} جنيه
+                                </p>
+                              </div>
 
-                            <button
-                              type="button"
-                              onClick={() =>
-                                onDecrease(line.item.id, line.optionLabel)
-                              }
-                              aria-label={`قلل ${line.item.name}${
-                                line.optionLabel
-                                  ? ` - ${line.optionLabel}`
-                                  : ""
-                              }`}
-                              className="flex size-8 items-center justify-center rounded-lg text-base font-bold text-(--ink) transition-colors hover:bg-(--accent-glow)"
-                            >
-                              −
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })}
+                              <div className="flex shrink-0 items-center gap-1 rounded-xl border border-(--line) p-1">
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    onIncrease(line.item.id, line.optionLabel)
+                                  }
+                                  aria-label={`زود ${line.item.name}${
+                                    line.optionLabel
+                                      ? ` - ${line.optionLabel}`
+                                      : ""
+                                  }`}
+                                  className="flex size-8 items-center justify-center rounded-lg text-base font-bold text-(--ink) transition-colors hover:bg-(--accent-glow)"
+                                >
+                                  +
+                                </button>
+
+                                <span className="min-w-7 text-center text-sm font-bold text-(--ink)">
+                                  {line.quantity}
+                                </span>
+
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    onDecrease(line.item.id, line.optionLabel)
+                                  }
+                                  aria-label={`قلل ${line.item.name}${
+                                    line.optionLabel
+                                      ? ` - ${line.optionLabel}`
+                                      : ""
+                                  }`}
+                                  className="flex size-8 items-center justify-center rounded-lg text-base font-bold text-(--ink) transition-colors hover:bg-(--accent-glow)"
+                                >
+                                  −
+                                </button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-2 border-t border-(--line) pt-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-(--ink-soft)">
+                      الإجمالي
+                    </span>
+                    <span className="text-lg font-bold text-(--ink)">
+                      {totalPrice} جنيه
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-(--accent) px-4 py-3.5 text-sm font-bold text-(--surface) shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
+                  >
+                    التالي
+                    <ArrowRight size={18} aria-hidden="true" />
+                  </button>
+
+                  {onClear && (
+                    <button
+                      type="button"
+                      onClick={handleClearCart}
+                      className="mt-3 w-full rounded-xl px-4 py-2.5 text-sm font-semibold text-(--ink-soft) transition-colors hover:bg-(--accent-glow) hover:text-(--ink)"
+                    >
+                      مسح السلة
+                    </button>
+                  )}
+                </div>
+              </>
+            ) : step === "details" ? (
+              <div className="space-y-5">
+                <div>
+                  <label
+                    htmlFor="checkout-name"
+                    className="text-sm font-bold text-(--ink)"
+                  >
+                    الاسم
+                  </label>
+                  <input
+                    id="checkout-name"
+                    type="text"
+                    value={customer.name}
+                    onChange={(event) => updateCustomer("name", event.target.value)}
+                    placeholder="اكتب اسمك"
+                    autoComplete="name"
+                    className="mt-2 w-full rounded-xl border border-(--line) bg-background px-4 py-3 text-sm text-(--ink) outline-none transition-colors placeholder:text-(--ink-muted) focus:border-(--accent)"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="checkout-phone"
+                    className="text-sm font-bold text-(--ink)"
+                  >
+                    رقم الموبايل
+                  </label>
+                  <input
+                    id="checkout-phone"
+                    type="tel"
+                    value={customer.phone}
+                    onChange={(event) => updateCustomer("phone", event.target.value)}
+                    placeholder="01xxxxxxxxx"
+                    inputMode="numeric"
+                    autoComplete="tel"
+                    maxLength={11}
+                    className="mt-2 w-full rounded-xl border border-(--line) bg-background px-4 py-3 text-sm text-(--ink) outline-none transition-colors placeholder:text-(--ink-muted) focus:border-(--accent)"
+                  />
+                </div>
+
+                <div>
+                  <p className="text-sm font-bold text-(--ink)">طريقة الاستلام</p>
+                  <div className="mt-2 grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => updateCustomer("fulfillment", "delivery")}
+                      aria-pressed={customer.fulfillment === "delivery"}
+                      className={`rounded-xl border px-3 py-3 text-sm font-bold transition-colors ${
+                        customer.fulfillment === "delivery"
+                          ? "border-(--accent) bg-(--accent) text-foreground"
+                          : "border-(--line) bg-background text-(--ink-soft) hover:border-(--accent) hover:text-(--ink)"
+                      }`}
+                    >
+                      توصيل
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => updateCustomer("fulfillment", "pickup")}
+                      aria-pressed={customer.fulfillment === "pickup"}
+                      className={`rounded-xl border px-3 py-3 text-sm font-bold transition-colors ${
+                        customer.fulfillment === "pickup"
+                          ? "border-(--accent) bg-(--accent) text-foreground"
+                          : "border-(--line) bg-background text-(--ink-soft) hover:border-(--accent) hover:text-(--ink)"
+                      }`}
+                    >
+                      من المطعم
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
 
-            <div className="mt-2 border-t border-(--line) pt-4">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-(--ink-soft)">
-                  الإجمالي
-                </span>
-                <span className="text-lg font-bold text-(--ink)">
-                  {totalPrice} جنيه
-                </span>
+                {customer.fulfillment === "delivery" ? (
+                  <div>
+                    <label
+                      htmlFor="checkout-address"
+                      className="text-sm font-bold text-(--ink)"
+                    >
+                      عنوان التوصيل
+                    </label>
+                    <textarea
+                      id="checkout-address"
+                      value={customer.address}
+                      onChange={(event) =>
+                        updateCustomer("address", event.target.value)
+                      }
+                      placeholder="المحلة الكبرى، المنطقة، الشارع، وعلامة مميزة"
+                      autoComplete="street-address"
+                      rows={3}
+                      className="mt-2 w-full resize-none rounded-xl border border-(--line) bg-background px-4 py-3 text-sm leading-6 text-(--ink) outline-none transition-colors placeholder:text-(--ink-muted) focus:border-(--accent)"
+                    />
+                  </div>
+                ) : null}
+
+                <div>
+                  <label
+                    htmlFor="checkout-notes"
+                    className="text-sm font-bold text-(--ink)"
+                  >
+                    ملاحظات <span className="font-normal text-(--ink-muted)">(اختياري)</span>
+                  </label>
+                  <textarea
+                    id="checkout-notes"
+                    value={customer.notes}
+                    onChange={(event) => updateCustomer("notes", event.target.value)}
+                    placeholder="مثلاً: بدون بصل، الدور الثالث..."
+                    rows={2}
+                    className="mt-2 w-full resize-none rounded-xl border border-(--line) bg-background px-4 py-3 text-sm leading-6 text-(--ink) outline-none transition-colors placeholder:text-(--ink-muted) focus:border-(--accent)"
+                  />
+                </div>
+
+                {error ? (
+                  <p className="rounded-xl border border-(--accent)/30 bg-(--accent-glow) px-3 py-2.5 text-sm font-semibold leading-6 text-(--ink)">
+                    {error}
+                  </p>
+                ) : null}
+
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    className="flex-1 rounded-xl border border-(--line) px-4 py-3.5 text-sm font-bold text-(--ink) transition-colors hover:border-(--accent) hover:text-(--ink)"
+                  >
+                    رجوع
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="flex-[1.4] rounded-xl bg-(--accent) px-4 py-3.5 text-sm font-bold text-(--surface) shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
+                  >
+                    التالي
+                  </button>
+                </div>
               </div>
+            ) : (
+              <>
+                <div className="space-y-4">
+                  <div className="rounded-xl border border-(--line) bg-background p-4">
+                    <h3 className="text-sm font-bold text-(--ink)">بيانات العميل</h3>
+                    <div className="mt-3 space-y-2 text-sm leading-6 text-(--ink-soft)">
+                      <p>الاسم: {customer.name.trim()}</p>
+                      <p>الهاتف: {customer.phone.replace(/\s+/g, "")}</p>
+                      <p>
+                        الاستلام: {customer.fulfillment === "delivery" ? "توصيل" : "من المطعم"}
+                      </p>
+                      {customer.fulfillment === "delivery" ? (
+                        <p>العنوان: {customer.address.trim()}</p>
+                      ) : null}
+                      {customer.notes.trim() ? (
+                        <p>ملاحظات: {customer.notes.trim()}</p>
+                      ) : null}
+                    </div>
+                  </div>
 
-              <button
-                type="button"
-                onClick={handleWhatsAppOrder}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-(--accent) px-4 py-3.5 text-sm font-bold text-(--surface) shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
-              >
-                <MessageCircle size={19} aria-hidden="true" />
-                اطلب على واتساب
-              </button>
+                  <div className="rounded-xl border border-(--line) bg-background p-4">
+                    <h3 className="text-sm font-bold text-(--ink)">الطلب</h3>
+                    <div className="mt-3 space-y-3">
+                      {cartGroups.map((group) => (
+                        <div key={group.item.id}>
+                          <p className="text-sm font-bold text-(--ink)">{group.item.name}</p>
+                          {group.lines.map((line) => (
+                            <p
+                              key={`${line.item.id}-${line.optionLabel ?? "default"}`}
+                              className="mt-1 text-xs text-(--ink-soft)"
+                            >
+                              {line.optionLabel ? `${line.optionLabel} • ` : ""}
+                              {line.quantity} × {line.price} جنيه
+                            </p>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-4 border-t border-(--line) pt-3 text-sm font-bold text-(--ink)">
+                      الإجمالي: {totalPrice} جنيه
+                    </div>
+                  </div>
+                </div>
 
-              {onClear && (
-                <button
-                  type="button"
-                  onClick={handleClearCart}
-                  className="mt-3 w-full rounded-xl px-4 py-2.5 text-sm font-semibold text-(--ink-soft) transition-colors hover:bg-(--accent-glow) hover:text-(--ink)"
-                >
-                  مسح السلة
-                </button>
-              )}
-            </div>
+                {error ? (
+                  <p className="mt-4 rounded-xl border border-(--accent)/30 bg-(--accent-glow) px-3 py-2.5 text-sm font-semibold leading-6 text-(--ink)">
+                    {error}
+                  </p>
+                ) : null}
+
+                <div className="mt-5 flex gap-2">
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    className="flex-1 rounded-xl border border-(--line) px-4 py-3.5 text-sm font-bold text-(--ink) transition-colors hover:border-(--accent)"
+                  >
+                    رجوع
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleWhatsAppOrder}
+                    className="flex-[1.6] inline-flex items-center justify-center gap-2 rounded-xl bg-(--accent) px-4 py-3.5 text-sm font-bold text-(--surface) shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
+                  >
+                    <MessageCircle size={19} aria-hidden="true" />
+                    تأكيد وإرسال
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
