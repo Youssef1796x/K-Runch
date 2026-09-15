@@ -497,6 +497,15 @@ export const menuItems: MenuItem[] = [
     image: "",
     available: true,
   },
+  {
+    id: "apache-seafood",
+    category: "seafood-sandwiches",
+    name: "أباتشي",
+    description: "ساندوتش فرنسي كبير بحشوة سي فود وصوصات مميزة",
+    price: 210,
+    image: "",
+    available: true,
+  },
 
   // باستا ميلانو
   {
