@@ -2,9 +2,9 @@
 
 ## Product Goal
 
-The website should increase restaurant orders while staying simple, fast, enjoyable, and easy to use.
+The website should make it easy for customers to browse the restaurant menu and place an order while keeping the experience simple, fast, and natural.
 
-The experience should feel like browsing and ordering from a real Egyptian restaurant, not a generic e-commerce store.
+The experience should feel like using a real Egyptian restaurant website, not a generic e-commerce store.
 
 ## Core Principles
 
@@ -14,8 +14,9 @@ The experience should feel like browsing and ordering from a real Egyptian resta
 - Primary mobile reference: 390×844
 - Responsive testing: 360×800, 390×844, 412×915, tablet, desktop
 - Menu and ordering are the center of the experience
-- Supporting sections must stay lightweight
+- Supporting sections stay lightweight
 - Avoid unnecessary features and complexity
+- Restaurant content should remain configurable
 
 ## Homepage
 
@@ -29,16 +30,20 @@ Navbar
 → Location / Contact
 → Footer
 
-The Hero should be compact and quickly guide the user to the Menu.
+The Hero is intentionally compact and guides the user toward the Menu.
 
-The homepage should serve both:
+The homepage serves both:
 
-- new visitors who need restaurant context and trust
+- new visitors who want basic restaurant information and social proof
 - returning visitors who mainly want to reach the Menu quickly
+
+The navigation provides links to the main homepage sections, with a mobile menu for smaller screens.
 
 ## Menu
 
 The Menu is the main part of the website.
+
+The current menu contains the restaurant's configured categories and items from `src/data/menu.ts`.
 
 Current categories:
 
@@ -59,150 +64,186 @@ Current categories:
 - قسم المشروبات
 - وجبات اللحوم والدجاج
 
-Categories should help users jump between sections rather than hide/filter the rest of the menu.
+A horizontal category selector lets the customer choose a category. The selected category filters the visible menu items to that category.
 
-The full menu can remain visible as vertically organized category sections.
+The menu uses progressive item visibility. It initially shows a limited number of items and allows the customer to reveal more items in stages until the full category is available.
 
-Each item should clearly show:
+Each item can show:
 
 - image
 - name
 - short description when available
-- price or price options
+- price or multiple price options
 - availability
-- add/quantity controls
+- quantity controls
 
-Direct adding should be possible for available items.
+Available items can be added directly from their card.
 
-The current main menu contains 77 real items from `src/data/menu.ts`.
+Items with multiple price options keep quantities independent for each selected option. For example, different sizes/options of the same item can be present in the cart with different quantities.
+
+Images can be opened in a larger view from the item card.
 
 ## Cart
 
-The Cart should preserve the user's Menu context.
+The Cart is an overlay-based checkout entry point that keeps the customer on the current page while showing the current order.
 
-Initial direction:
-
-- Mobile: floating cart summary + bottom-sheet/overlay
-- Desktop: side drawer/overlay
-
-The cart should clearly show:
+The cart clearly shows:
 
 - selected items
+- selected options when applicable
 - quantities
+- item prices
 - total
-- remove/edit actions
+- quantity increase/decrease controls
+- clear-cart action
 
-The cart should become visible after the first item is added.
+The cart becomes available once the customer has added an item.
+
+The customer can continue from the cart to the checkout flow.
 
 ## Ordering Flow
 
 Menu
 → Add item
 → Cart
-→ Checkout
+→ Customer Details
 → Final Review
 → WhatsApp
 
-The user must be able to return and edit before the final WhatsApp handoff.
+The customer can return to the previous step and edit the order before the final WhatsApp handoff.
 
-Checkout collects only:
+Customer details currently include:
 
 - name
-- phone
-- address
+- mobile number
+- fulfillment method: delivery or pickup from the restaurant
+- delivery address when delivery is selected
+- optional current-location link when delivery is selected
 - optional notes
 
-No account, login, payment, or unnecessary fields.
+No account, login, online payment, or unnecessary customer data is required.
 
 ## Final Review
 
-A separate final review step is currently preferred.
+The checkout includes a final review step before opening WhatsApp.
 
-Its purpose is to let the customer confirm the complete order before leaving the website.
+Its purpose is to let the customer verify the order and customer information before leaving the website.
 
-It should show:
+The review shows:
 
-- items
+- customer information
+- fulfillment method
+- delivery address when applicable
+- location status when provided
+- notes when provided
+- ordered items
+- selected options
 - quantities
 - prices
 - total
-- customer information
 
-Actions:
-
-- رجوع للتعديل
-- اطلب عبر واتساب
+The customer can go back to edit the details or confirm the order handoff.
 
 ## WhatsApp
 
 The website prepares an Arabic WhatsApp message containing the order and customer information.
 
-The website opens WhatsApp with the prepared message.
+After the customer confirms the review, the website opens WhatsApp with the prepared message.
 
-The customer manually presses Send.
+The customer manually presses Send in WhatsApp.
 
-The website must never claim that the restaurant accepted or confirmed the order.
+The website does not claim that the restaurant accepted or confirmed the order. There is currently no backend order persistence or order-tracking system.
 
 ## Supporting Sections
 
 ### About
 
-Short and supportive. It should not delay access to the Menu.
+The About section is intentionally simple and supportive. It presents the restaurant identity, a short description, and the configured Facebook link without adding unnecessary content.
 
 ### Reviews
 
-The demo version may use clearly identifiable placeholder review data to demonstrate the layout and interaction.
+Reviews are configurable restaurant content and are displayed as social proof within the homepage.
 
-Before final client launch, placeholder reviews must be replaced with real customer review data supplied or approved by the restaurant.
+Demo or placeholder reviews may be used during development, but they should be replaced with real customer review data supplied or approved by the restaurant before final client launch.
 
 ### Location / Contact
 
-Should provide practical information such as address, hours, phone, and useful location/contact actions when real data is available.
+The Location section provides practical restaurant information and contact actions when the corresponding data is available.
+
+It can include:
+
+- address/location
+- map action
+- opening hours
+- phone number
+- WhatsApp contact
 
 ### Footer
 
-Keep it simple.
+The Footer remains simple and uses configurable restaurant name and tagline information.
 
 ## Responsive Direction
 
-Mobile and desktop share the same product logic but may use different layouts.
+Mobile and desktop share the same product logic while adapting the layout to the available space.
 
 ### Mobile
 
 Prioritize:
 
 - fast access to the Menu
-- compact item presentation
-- easy touch interaction
-- persistent cart visibility after adding
-- simple overlays
+- compact menu cards
+- comfortable touch targets
+- easy quantity changes
+- accessible cart overlay
+- simple checkout steps
 
 ### Desktop
 
 Use the available space to improve:
 
 - menu presentation
-- cart visibility
+- category navigation
+- cart and checkout readability
 - overall breathing room
 
-Do not simply scale the mobile layout up.
+The desktop layout should not simply be a stretched version of the mobile layout.
 
-## Decisions Intentionally Still Open
+## Current Implementation Status
 
-These should be validated through real UI slices instead of being decided prematurely:
+The following UX decisions are already implemented and should be treated as current behavior rather than open design questions:
 
-- exact Hero height
-- mobile Menu card orientation
-- whether category shortcuts should be sticky
-- exact cart dimensions
-- exact checkout/review presentation
-- final color palette and visual design system
+- compact Hero layout
+- horizontal menu category selector
+- category-based menu filtering
+- progressive menu item visibility
+- item price options
+- independent quantities per item option
+- image enlargement from menu cards
+- cart overlay
+- multi-step checkout
+- delivery/pickup selection
+- optional delivery location link
+- final order review
+- WhatsApp handoff with a prepared order message
+- configurable restaurant content and reviews
+
+## Intentionally Out of Scope
+
+The current project is a frontend restaurant ordering website. The following are not part of the current scope unless explicitly requested later:
+
+- backend/database order persistence
+- customer accounts or login
+- online payment processing
+- admin dashboard
+- order tracking system
+- analytics platform
+- unnecessary third-party services
 
 ## Development Philosophy
 
-Do not build the entire experience before validating it.
+Keep changes focused and validate real user behavior through small, understandable steps.
 
-Prefer small vertical slices that prove real user behavior.
+Prefer working from the current implementation and real restaurant data rather than maintaining documentation that describes an older or hypothetical design.
 
 A typical validation slice should follow:
 
@@ -210,3 +251,4 @@ real data
 → visible UI
 → real interaction
 → state change
+→ validation
