@@ -95,14 +95,14 @@ export const menuItemImages: Record<string, string> = {
   // المشروبات
   "pepsi-cans": "https://images.pexels.com/photos/17461398/pexels-photo-17461398.jpeg?auto=compress&cs=tinysrgb&w=800",
   "free-cola": "https://images.pexels.com/photos/8879617/pexels-photo-8879617.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "twist-classic": "https://images.pexels.com/photos/34947111/pexels-photo-34947111.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "twist-classic": "https://images.pexels.com/photos/8879617/pexels-photo-8879617.jpeg?auto=compress&cs=tinysrgb&w=800",
   "pepsi-1-5l": "https://images.pexels.com/photos/988954/pexels-photo-988954.jpeg?auto=compress&cs=tinysrgb&w=800",
   "almarai-rayeb": "https://images.pexels.com/photos/30878212/pexels-photo-30878212.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "big-cola": "https://images.pexels.com/photos/34947111/pexels-photo-34947111.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "big-cola": "https://images.pexels.com/photos/8879617/pexels-photo-8879617.jpeg?auto=compress&cs=tinysrgb&w=800",
   "aswan-hibiscus": "https://images.pexels.com/photos/37228408/pexels-photo-37228408.jpeg?auto=compress&cs=tinysrgb&w=800",
   "sobia-milk": "https://images.pexels.com/photos/7573101/pexels-photo-7573101.jpeg?auto=compress&cs=tinysrgb&w=800",
   "tamarind": "https://images.pexels.com/photos/34467107/pexels-photo-34467107.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "kharoub": "/images/menu/photo_75_2026-09-16_18-14-05.jpg",
+  "kharoub": "/images/menu/kharoub-drink.png",
   "sakans-mix": "/images/menu/photo_76_2026-09-16_18-14-05.jpg",
 
   // وجبات اللحوم والدجاج
