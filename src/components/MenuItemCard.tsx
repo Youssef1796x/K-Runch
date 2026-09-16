@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Maximize2, X } from "lucide-react";
 import { useState } from "react";
 import type { MenuItem } from "@/src/data/menu";
+import { menuItemImages } from "@/src/data/menuImages";
 
 type MenuItemCardProps = {
   item: MenuItem;
@@ -30,15 +31,17 @@ export default function MenuItemCard({
     (option) => option.label === selectedOptionLabel,
   );
   const currentPrice = item.price ?? selectedOption?.price;
+  const imageSrc = item.image || menuItemImages[item.id] || "";
+  const displayName = item.id === "honey-moon" ? "شهر العسل" : item.name;
 
   return (
     <article className="flex w-full overflow-hidden rounded-2xl border border-(--line) bg-(--surface) p-2.5 sm:p-3">
       <div className="relative size-24 shrink-0 overflow-hidden rounded-xl border border-(--line-soft) bg-(--surface-tint) sm:size-28">
-        {item.image ? (
+        {imageSrc ? (
           <>
             <Image
-              src={item.image}
-              alt={item.name}
+              src={imageSrc}
+              alt={displayName}
               fill
               sizes="(min-width: 640px) 112px, 96px"
               quality={60}
@@ -47,7 +50,7 @@ export default function MenuItemCard({
             <button
               type="button"
               onClick={() => setIsImageOpen(true)}
-              aria-label={`تكبير صورة ${item.name}`}
+              aria-label={`تكبير صورة ${displayName}`}
               className="absolute bottom-1.5 inset-s-1.5 inline-flex size-8 items-center justify-center rounded-lg border border-white/15 bg-black/65 text-white shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
             >
               <Maximize2 size={14} aria-hidden="true" />
@@ -58,7 +61,7 @@ export default function MenuItemCard({
 
       <div className="min-w-0 flex-1 px-3 py-1 sm:px-4">
         <div className="min-w-0">
-          <h3 className="text-base font-bold leading-6 text-(--ink)">{item.name}</h3>
+          <h3 className="text-base font-bold leading-6 text-(--ink)">{displayName}</h3>
           {item.description ? (
             <p className="mt-1.5 text-sm leading-6 text-(--ink-soft)">
               {item.description}
@@ -67,7 +70,7 @@ export default function MenuItemCard({
         </div>
 
         {item.priceOptions?.length ? (
-          <div className="mt-3 flex flex-wrap gap-1.5" aria-label={`اختار حجم ${item.name}`}>
+          <div className="mt-3 flex flex-wrap gap-1.5" aria-label={`اختار حجم ${displayName}`}>
             {item.priceOptions.map((option) => {
               const isSelected = option.label === selectedOptionLabel;
 
@@ -112,7 +115,7 @@ export default function MenuItemCard({
               <div className="flex h-10 w-full items-center rounded-lg border border-(--line) bg-background p-1">
                 <button
                   type="button"
-                  aria-label={`زود ${item.name}`}
+                  aria-label={`زود ${displayName}`}
                   onClick={onIncrease}
                   className="flex size-8 shrink-0 items-center justify-center rounded-md text-lg font-bold text-(--ink) transition-colors hover:bg-(--accent-glow) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
                 >
@@ -125,7 +128,7 @@ export default function MenuItemCard({
 
                 <button
                   type="button"
-                  aria-label={`قلل ${item.name}`}
+                  aria-label={`قلل ${displayName}`}
                   onClick={onDecrease}
                   className="flex size-8 shrink-0 items-center justify-center rounded-md text-lg font-bold text-(--ink) transition-colors hover:bg-(--accent-glow) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
                 >
@@ -137,12 +140,12 @@ export default function MenuItemCard({
         </div>
       </div>
 
-      {isImageOpen && item.image ? (
+      {isImageOpen && imageSrc ? (
         <div
           className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 p-4"
           role="dialog"
           aria-modal="true"
-          aria-label={`صورة ${item.name}`}
+          aria-label={`صورة ${displayName}`}
           onClick={() => setIsImageOpen(false)}
         >
           <div
@@ -160,8 +163,8 @@ export default function MenuItemCard({
 
             <div className="relative h-[70vh] max-h-175 w-full">
               <Image
-                src={item.image}
-                alt={item.name}
+                src={imageSrc}
+                alt={displayName}
                 fill
                 sizes="(min-width: 768px) 672px, calc(100vw - 32px)"
                 quality={65}
