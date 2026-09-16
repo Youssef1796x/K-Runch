@@ -5,6 +5,7 @@ import { Maximize2, X } from "lucide-react";
 import { useState } from "react";
 import type { MenuItem } from "@/src/data/menu";
 import { menuItemImages } from "@/src/data/menuImages";
+import { menuImageOverrides } from "@/src/data/menuImageOverrides";
 
 type MenuItemCardProps = {
   item: MenuItem;
@@ -31,7 +32,8 @@ export default function MenuItemCard({
     (option) => option.label === selectedOptionLabel,
   );
   const currentPrice = item.price ?? selectedOption?.price;
-  const imageSrc = item.image || menuItemImages[item.id] || "";
+  const imageSrc =
+    menuImageOverrides[item.id] ?? menuItemImages[item.id] ?? "";
   const displayName = item.id === "honey-moon" ? "شهر العسل" : item.name;
 
   return (
