@@ -15,72 +15,6 @@ type MenuItemCardProps = {
   onIncrease: () => void;
 };
 
-const fallbackImages: Record<string, string[]> = {
-  "chicken-crepe": [
-    "/images/menu/quick-pack/chicken-crepe.svg",
-    "/images/menu/quick-pack/crispy-chicken.svg",
-  ],
-  "meat-cheese-crepe": [
-    "/images/menu/quick-pack/beef-crepe.svg",
-    "/images/menu/quick-pack/chicken-crepe.svg",
-  ],
-  "seafood-crepe": [
-    "/images/menu/quick-pack/seafood-crepe.svg",
-    "/images/menu/quick-pack/shrimp.svg",
-  ],
-  "sweet-crepe": [
-    "/images/menu/quick-pack/sweet-crepe.svg",
-    "/images/menu/quick-pack/chocolate-crepe.svg",
-  ],
-  "chicken-sandwiches": [
-    "/images/menu/quick-pack/chicken-sandwich.svg",
-    "/images/menu/quick-pack/crispy-chicken.svg",
-  ],
-  "chicken-burger": [
-    "/images/menu/quick-pack/chicken-burger.svg",
-    "/images/menu/quick-pack/crispy-chicken.svg",
-  ],
-  "beef-burger": [
-    "/images/menu/quick-pack/beef-burger.svg",
-    "/images/menu/quick-pack/smash-burger.svg",
-  ],
-  "smash-burger": [
-    "/images/menu/quick-pack/smash-burger.svg",
-    "/images/menu/quick-pack/beef-burger.svg",
-  ],
-  "seafood-meals": [
-    "/images/menu/quick-pack/seafood-meal.svg",
-    "/images/menu/quick-pack/shrimp.svg",
-    "/images/menu/quick-pack/fish.svg",
-  ],
-  "seafood-sandwiches": [
-    "/images/menu/quick-pack/seafood-sandwich.svg",
-    "/images/menu/quick-pack/shrimp.svg",
-  ],
-  "milano-pasta": ["/images/menu/quick-pack/pasta.svg"],
-  "fries-zone": ["/images/menu/quick-pack/fries.svg"],
-  "al-harash": ["/images/menu/quick-pack/harash.svg"],
-  "al-harash-meals": ["/images/menu/quick-pack/harash-meal.svg"],
-  drinks: ["/images/menu/quick-pack/drinks.svg"],
-  "meat-chicken-meals": [
-    "/images/menu/quick-pack/mixed-grill.svg",
-    "/images/menu/quick-pack/crispy-chicken.svg",
-    "/images/menu/quick-pack/fish.svg",
-  ],
-};
-
-const fallbackImageFor = (item: MenuItem) => {
-  const images = fallbackImages[item.category] ?? [
-    "/images/menu/quick-pack/mixed-grill.svg",
-  ];
-
-  const hash = item.id
-    .split("")
-    .reduce((total, character) => total + character.charCodeAt(0), 0);
-
-  return images[hash % images.length];
-};
-
 export default function MenuItemCard({
   item,
   quantity,
@@ -91,46 +25,36 @@ export default function MenuItemCard({
   onIncrease,
 }: MenuItemCardProps) {
   const [isImageOpen, setIsImageOpen] = useState(false);
-  const [failedImageSrc, setFailedImageSrc] = useState<string | null>(null);
 
   const selectedOption = item.priceOptions?.find(
     (option) => option.label === selectedOptionLabel,
   );
   const currentPrice = item.price ?? selectedOption?.price;
-  const preferredImageSrc =
-    item.image || `/images/menu/items/${item.category}/${item.id}.webp`;
-  const imageSrc =
-    failedImageSrc === preferredImageSrc
-      ? fallbackImageFor(item)
-      : preferredImageSrc;
-
-  const handleImageError = () => {
-    if (imageSrc === preferredImageSrc) {
-      setFailedImageSrc(preferredImageSrc);
-    }
-  };
 
   return (
     <article className="flex w-full overflow-hidden rounded-2xl border border-(--line) bg-(--surface) p-2.5 sm:p-3">
       <div className="relative size-24 shrink-0 overflow-hidden rounded-xl border border-(--line-soft) bg-(--surface-tint) sm:size-28">
-        <Image
-          src={imageSrc}
-          alt={item.name}
-          fill
-          sizes="(min-width: 640px) 112px, 96px"
-          quality={60}
-          className="object-cover"
-          onError={handleImageError}
-        />
+        {item.image ? (
+          <>
+            <Image
+              src={item.image}
+              alt={item.name}
+              fill
+              sizes="(min-width: 640px) 112px, 96px"
+              quality={60}
+              className="object-cover"
+            />
 
-        <button
-          type="button"
-          onClick={() => setIsImageOpen(true)}
-          aria-label={`تكبير صورة ${item.name}`}
-          className="absolute bottom-1.5 inset-s-1.5 inline-flex size-8 items-center justify-center rounded-lg border border-white/15 bg-black/65 text-white shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
-        >
-          <Maximize2 size={14} aria-hidden="true" />
-        </button>
+            <button
+              type="button"
+              onClick={() => setIsImageOpen(true)}
+              aria-label={`تكبير صورة ${item.name}`}
+              className="absolute bottom-1.5 inset-s-1.5 inline-flex size-8 items-center justify-center rounded-lg border border-white/15 bg-black/65 text-white shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
+            >
+              <Maximize2 size={14} aria-hidden="true" />
+            </button>
+          </>
+        ) : null}
       </div>
 
       <div className="min-w-0 flex-1 px-3 py-1 sm:px-4">
@@ -214,7 +138,7 @@ export default function MenuItemCard({
         </div>
       </div>
 
-      {isImageOpen ? (
+      {isImageOpen && item.image ? (
         <div
           className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 p-4"
           role="dialog"
@@ -237,13 +161,12 @@ export default function MenuItemCard({
 
             <div className="relative h-[70vh] max-h-175 w-full">
               <Image
-                src={imageSrc}
+                src={item.image}
                 alt={item.name}
                 fill
                 sizes="(min-width: 768px) 672px, calc(100vw - 32px)"
                 quality={65}
                 className="object-contain"
-                onError={handleImageError}
               />
             </div>
           </div>
