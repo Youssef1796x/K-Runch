@@ -91,11 +91,24 @@ export default function MenuItemCard({
   onIncrease,
 }: MenuItemCardProps) {
   const [isImageOpen, setIsImageOpen] = useState(false);
+  const [failedImageSrc, setFailedImageSrc] = useState<string | null>(null);
+
   const selectedOption = item.priceOptions?.find(
     (option) => option.label === selectedOptionLabel,
   );
   const currentPrice = item.price ?? selectedOption?.price;
-  const imageSrc = item.image || fallbackImageFor(item);
+  const preferredImageSrc =
+    item.image || `/images/menu/items/${item.category}/${item.id}.webp`;
+  const imageSrc =
+    failedImageSrc === preferredImageSrc
+      ? fallbackImageFor(item)
+      : preferredImageSrc;
+
+  const handleImageError = () => {
+    if (imageSrc === preferredImageSrc) {
+      setFailedImageSrc(preferredImageSrc);
+    }
+  };
 
   return (
     <article className="flex w-full overflow-hidden rounded-2xl border border-(--line) bg-(--surface) p-2.5 sm:p-3">
@@ -107,6 +120,7 @@ export default function MenuItemCard({
           sizes="(min-width: 640px) 112px, 96px"
           quality={60}
           className="object-cover"
+          onError={handleImageError}
         />
 
         <button
@@ -229,6 +243,7 @@ export default function MenuItemCard({
                 sizes="(min-width: 768px) 672px, calc(100vw - 32px)"
                 quality={65}
                 className="object-contain"
+                onError={handleImageError}
               />
             </div>
           </div>
