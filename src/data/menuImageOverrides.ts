@@ -20,7 +20,7 @@ export const menuImageOverrides: Record<string, string> = {
   "aswan-hibiscus":
     "https://images.pexels.com/photos/36630822/pexels-photo-36630822.jpeg?auto=compress&cs=tinysrgb&w=800",
   "sobia-milk":
-    "https://images.pexels.com/photos/26698544/pexels-photo-26698544.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/26648792/pexels-photo-26648792.jpeg?auto=compress&cs=tinysrgb&w=800",
   "tamarind":
     "https://images.pexels.com/photos/34467110/pexels-photo-34467110.jpeg?auto=compress&cs=tinysrgb&w=800",
 };
