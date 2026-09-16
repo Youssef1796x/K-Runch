@@ -23,4 +23,8 @@ export const menuImageOverrides: Record<string, string> = {
     "https://images.pexels.com/photos/26648792/pexels-photo-26648792.jpeg?auto=compress&cs=tinysrgb&w=800",
   "tamarind":
     "https://images.pexels.com/photos/34467110/pexels-photo-34467110.jpeg?auto=compress&cs=tinysrgb&w=800",
+
+  // كريب الدجاج
+  "sonic-bomb-crepe":
+    "https://images.pexels.com/photos/10361459/pexels-photo-10361459.jpeg?auto=compress&cs=tinysrgb&w=800",
 };
