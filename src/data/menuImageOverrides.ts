@@ -6,9 +6,9 @@ export const menuImageOverrides: Record<string, string> = {
   "pepsi-cans":
     "https://images.pexels.com/photos/30554816/pexels-photo-30554816.jpeg?cs=srgb&fm=jpg",
   "free-cola":
-    "https://images.pexels.com/photos/11594548/pexels-photo-11594548.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/14973056/pexels-photo-14973056.jpeg?auto=compress&cs=tinysrgb&w=800",
   "twist-classic":
-    "https://images.pexels.com/photos/32658918/pexels-photo-32658918.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/20045266/pexels-photo-20045266.jpeg?auto=compress&cs=tinysrgb&w=800",
   "pepsi-1-5l":
     "https://images.pexels.com/photos/988954/pexels-photo-988954.jpeg?cs=srgb&fm=jpg",
   "big-cola":
