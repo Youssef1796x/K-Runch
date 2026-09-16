@@ -4,7 +4,7 @@
 export const menuImageOverrides: Record<string, string> = {
   // المشروبات الغازية
   "pepsi-cans":
-    "https://images.pexels.com/photos/17461398/pexels-photo-17461398.jpeg?cs=srgb&fm=jpg",
+    "https://images.pexels.com/photos/30554816/pexels-photo-30554816.jpeg?cs=srgb&fm=jpg",
   "free-cola":
     "https://images.pexels.com/photos/11594548/pexels-photo-11594548.jpeg?auto=compress&cs=tinysrgb&w=800",
   "twist-classic":
