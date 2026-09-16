@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Maximize2, X } from "lucide-react";
 import { useState } from "react";
+import { menuItems } from "@/src/data/menu";
 import type { MenuItem } from "@/src/data/menu";
 
 type MenuItemCardProps = {
@@ -26,6 +27,13 @@ export default function MenuItemCard({
 }: MenuItemCardProps) {
   const [isImageOpen, setIsImageOpen] = useState(false);
 
+  const itemIndex = menuItems.findIndex((menuItem) => menuItem.id === item.id);
+  const photoNumber = itemIndex >= 0 && itemIndex < 78 ? itemIndex + 1 : null;
+  const generatedImage = photoNumber
+    ? `/images/menu/photo_${photoNumber}_2026-09-16_${photoNumber <= 62 ? "17-03-52" : "17-03-53"}.jpg`
+    : "";
+  const imageSrc = item.image || generatedImage;
+
   const selectedOption = item.priceOptions?.find(
     (option) => option.label === selectedOptionLabel,
   );
@@ -34,10 +42,10 @@ export default function MenuItemCard({
   return (
     <article className="flex w-full overflow-hidden rounded-2xl border border-(--line) bg-(--surface) p-2.5 sm:p-3">
       <div className="relative size-24 shrink-0 overflow-hidden rounded-xl border border-(--line-soft) bg-(--surface-tint) sm:size-28">
-        {item.image ? (
+        {imageSrc ? (
           <>
             <Image
-              src={item.image}
+              src={imageSrc}
               alt={item.name}
               fill
               sizes="(min-width: 640px) 112px, 96px"
@@ -138,7 +146,7 @@ export default function MenuItemCard({
         </div>
       </div>
 
-      {isImageOpen && item.image ? (
+      {isImageOpen && imageSrc ? (
         <div
           className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 p-4"
           role="dialog"
@@ -161,7 +169,7 @@ export default function MenuItemCard({
 
             <div className="relative h-[70vh] max-h-175 w-full">
               <Image
-                src={item.image}
+                src={imageSrc}
                 alt={item.name}
                 fill
                 sizes="(min-width: 768px) 672px, calc(100vw - 32px)"
