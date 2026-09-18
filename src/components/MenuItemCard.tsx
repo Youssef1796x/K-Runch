@@ -33,6 +33,7 @@ export default function MenuItemCard({
   const currentPrice = item.price ?? selectedOption?.price;
   const imageSrc = item.image || menuItemImages[item.id] || "";
   const displayName = item.id === "honey-moon" ? "شهر العسل" : item.name;
+  const isExternalImage = /^https?:\/\//.test(imageSrc);
 
   return (
     <article className="flex w-full overflow-hidden rounded-2xl border border-(--line) bg-(--surface) p-2.5 sm:p-3">
@@ -45,6 +46,7 @@ export default function MenuItemCard({
               fill
               sizes="(min-width: 640px) 112px, 96px"
               quality={60}
+              unoptimized={isExternalImage}
               className="object-cover"
             />
             <button
@@ -168,6 +170,7 @@ export default function MenuItemCard({
                 fill
                 sizes="(min-width: 768px) 672px, calc(100vw - 32px)"
                 quality={65}
+                unoptimized={isExternalImage}
                 className="object-contain"
               />
             </div>
