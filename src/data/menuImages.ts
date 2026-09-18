@@ -98,12 +98,12 @@ export const menuItemImages: Record<string, string> = {
   "twist-classic": "https://images.pexels.com/photos/9170103/pexels-photo-9170103.jpeg?auto=compress&cs=tinysrgb&w=800",
   "pepsi-1-5l": "https://images.pexels.com/photos/7073594/pexels-photo-7073594.jpeg?auto=compress&cs=tinysrgb&w=800",
   "almarai-rayeb": "https://images.pexels.com/photos/26648792/pexels-photo-26648792.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "big-cola": "https://www.ajegroup.com/aje-assets/wp-content/uploads/2020/05/Egipto-big-cola.jpg",
+  "big-cola": "https://images.pexels.com/photos/8117869/pexels-photo-8117869.jpeg?auto=compress&cs=tinysrgb&w=800",
   "aswan-hibiscus": "https://images.pexels.com/photos/2672942/pexels-photo-2672942.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "sobia-milk": "https://images.pexels.com/photos/12984540/pexels-photo-12984540.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "tamarind": "https://images.pexels.com/photos/34467105/pexels-photo-34467105.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "sobia-milk": "https://images.pexels.com/photos/8646557/pexels-photo-8646557.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "tamarind": "https://images.pexels.com/photos/34534512/pexels-photo-34534512.jpeg?auto=compress&cs=tinysrgb&w=800",
   "kharoub": "https://redlandsranchmarket.com/cdn/shop/files/CarobDrinks.webp?v=1777651867&width=1946",
-  "sakans-mix": "https://images.pexels.com/photos/8329959/pexels-photo-8329959.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "sakans-mix": "https://images.pexels.com/photos/4239/pexels-photo-4239.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // وجبات اللحوم والدجاج
   "kofta-sogoq-meal": "/images/menu/photo_77_2026-09-16_18-14-05.jpg",
