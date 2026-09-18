@@ -30,7 +30,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="order-1 mx-auto w-full max-w-140 overflow-hidden rounded-[28px] border-3 border-[#ffd70045] lg:order-2">
+        <div className="order-1 mx-auto w-full max-w-140 overflow-hidden rounded-[28px] border-3 border-[#cfa34045] lg:order-2">
           <Image
             src={restaurantConfig.banner}
             alt={`بانر مطعم ${restaurantConfig.name}`}
