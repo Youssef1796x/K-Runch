@@ -101,7 +101,7 @@ export const menuItemImages: Record<string, string> = {
   "big-cola": "https://ik.imagekit.io/tijarahub/images/thumbnails/400/400/detailed/31/TijaraHub.jpeg.webp",
   "aswan-hibiscus": "https://images.pexels.com/photos/2672942/pexels-photo-2672942.jpeg?auto=compress&cs=tinysrgb&w=800",
   "sobia-milk": "https://images.deliveryhero.io/image/talabat/MenuItems/Natural_Sobia_juice_638577090280383191.jpg",
-  "tamarind": "https://images.pexels.com/photos/34467105/pexels-photo-34467105.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "tamarind": "/images/menu/tamarind-original.svg",
   "kharoub": "https://redlandsranchmarket.com/cdn/shop/files/CarobDrinks.webp?v=1777651867&width=1946",
   "sakans-mix": "https://images.pexels.com/photos/36630822/pexels-photo-36630822.jpeg?auto=compress&cs=tinysrgb&w=800",
 
