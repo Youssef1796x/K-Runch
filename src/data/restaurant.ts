@@ -68,7 +68,7 @@ export const restaurantConfig: RestaurantConfig = {
     body: "تقدر تزورنا في الفرع أو تتواصل معانا وتطلب بسهولة.",
     address: "المحلة الكبرى، الغربية",
     mapsUrl: "https://maps.app.goo.gl/fXSBYpkpDMbRd9Yx9",
-    hours: "يومياً من 10ص لـ 10م",
+    hours: "يومياً من 8ص لـ 5م",
     phone: "0402259889",
     whatsapp: "01069153469",
   },
