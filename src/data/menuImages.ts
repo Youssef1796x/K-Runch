@@ -81,11 +81,11 @@ export const menuItemImages: Record<string, string> = {
   "extreme": "https://images.pexels.com/photos/20535802/pexels-photo-20535802.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // قسم الحرش
-  "kebda": "https://images.pexels.com/photos/5191833/pexels-photo-5191833.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "sogoq": "https://images.pexels.com/photos/5860681/pexels-photo-5860681.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "hawawshi": "https://images.pexels.com/photos/36925858/pexels-photo-36925858.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "mokh-al-prince": "https://images.pexels.com/photos/37049898/pexels-photo-37049898.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "mombar-sandwich": "/images/menu/photo_62_2026-09-16_18-14-05.jpg",
+  "kebda": "https://images.pexels.com/photos/20500494/pexels-photo-20500494.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "sogoq": "https://images.pexels.com/photos/36691291/pexels-photo-36691291.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "hawawshi": "https://images.pexels.com/photos/37290076/pexels-photo-37290076.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "mokh-al-prince": "https://images.pexels.com/photos/37049908/pexels-photo-37049908.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "mombar-sandwich": "https://images.pexels.com/photos/16229424/pexels-photo-16229424.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // وجبات الحرش
   "kings-meal": "/images/menu/photo_63_2026-09-16_18-14-05.jpg",
