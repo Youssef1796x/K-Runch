@@ -107,6 +107,6 @@ export const menuItemImages: Record<string, string> = {
   "sakans-mix": "https://images.pexels.com/photos/36630822/pexels-photo-36630822.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // وجبات اللحوم والدجاج
-  "kofta-sogoq-meal": "https://images.pexels.com/photos/35536407/pexels-photo-35536407.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "kofta-sogoq-meal": "https://images.deliveryhero.io/image/talabat/MenuItems/WhatsApp_Image_20260107_a639034700417904680.jpeg",
   "shish-tawook-meal": "https://images.pexels.com/photos/18877581/pexels-photo-18877581.jpeg?auto=compress&cs=tinysrgb&w=800",
 };
