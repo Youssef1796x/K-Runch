@@ -62,15 +62,15 @@ export const menuItemImages: Record<string, string> = {
   "apache-seafood": "/images/menu/photo_42_2026-09-16_18-14-05.jpg",
 
   // باستا ميلانو
-  "negresco-lava": "/images/menu/photo_43_2026-09-16_18-14-05.jpg",
-  "crunchy-white": "/images/menu/photo_44_2026-09-16_18-14-05.jpg",
-  "white-lava": "/images/menu/photo_45_2026-09-16_18-14-05.jpg",
-  "sicilia": "/images/menu/photo_46_2026-09-16_18-14-05.jpg",
-  "venezia": "/images/menu/photo_47_2026-09-16_18-14-05.jpg",
-  "honey-moon": "/images/menu/photo_48_2026-09-16_18-14-05.jpg",
-  "roma-meat": "/images/menu/photo_49_2026-09-16_18-14-05.jpg",
-  "bolognese": "/images/menu/photo_50_2026-09-16_18-14-05.jpg",
-  "toscani": "/images/menu/photo_51_2026-09-16_18-14-05.jpg",
+  "negresco-lava": "https://images.pexels.com/photos/37336685/pexels-photo-37336685.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "crunchy-white": "https://images.pexels.com/photos/9731722/pexels-photo-9731722.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "white-lava": "https://images.pexels.com/photos/35622190/pexels-photo-35622190.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "sicilia": "https://images.pexels.com/photos/19842780/pexels-photo-19842780.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "venezia": "https://images.pexels.com/photos/16525900/pexels-photo-16525900.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "honey-moon": "https://images.pexels.com/photos/9571432/pexels-photo-9571432.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "roma-meat": "https://images.pexels.com/photos/33673991/pexels-photo-33673991.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "bolognese": "https://images.pexels.com/photos/15500452/pexels-photo-15500452.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "toscani": "https://images.pexels.com/photos/17346205/pexels-photo-17346205.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // قسم البطاطس
   "cheetos-potato": "/images/menu/photo_52_2026-09-16_18-14-05.jpg",
