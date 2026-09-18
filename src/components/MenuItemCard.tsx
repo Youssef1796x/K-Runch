@@ -84,7 +84,7 @@ export default function MenuItemCard({
                   aria-pressed={isSelected}
                   className={`rounded-md border px-3 py-1.5 text-xs font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent) ${
                     isSelected
-                      ? "border-(--accent) bg-(--accent) text-foreground"
+                      ? "border-(--accent) bg-(--accent) text-black"
                       : "border-(--line) bg-background text-(--ink-soft) hover:border-(--accent) hover:text-(--ink)"
                   }`}
                 >
@@ -109,7 +109,7 @@ export default function MenuItemCard({
               <button
                 type="button"
                 onClick={onAdd}
-                className="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-(--accent) px-3 py-2 text-sm font-bold text-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
+                className="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-(--accent) px-3 py-2 text-sm font-bold text-black transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
               >
                 عايز ده +
               </button>
