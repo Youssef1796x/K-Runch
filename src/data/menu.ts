@@ -581,7 +581,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "honey-moon",
     category: "milano-pasta",
-    name: "شهر العسل +18",
+    name: "شهر العسل",
     description:
       "طاجن الفوسفور والطاقة: باستا غنية بالجمبري والكاليماري مع الوايت صوص الكريمي والموزاريلا",
     price: 250,
