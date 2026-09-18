@@ -83,7 +83,7 @@ export const menuItemImages: Record<string, string> = {
   // قسم الحرش
   "kebda": "https://images.pexels.com/photos/20500494/pexels-photo-20500494.jpeg?auto=compress&cs=tinysrgb&w=800",
   "sogoq": "https://images.pexels.com/photos/34636424/pexels-photo-34636424.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "hawawshi": "https://images.pexels.com/photos/18425525/pexels-photo-18425525.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "hawawshi": "https://images.pexels.com/photos/29143174/pexels-photo-29143174.jpeg?auto=compress&cs=tinysrgb&w=800",
   "mokh-al-prince": "https://images.pexels.com/photos/37049908/pexels-photo-37049908.jpeg?auto=compress&cs=tinysrgb&w=800",
   "mombar-sandwich": "https://images.pexels.com/photos/16229424/pexels-photo-16229424.jpeg?auto=compress&cs=tinysrgb&w=800",
 
