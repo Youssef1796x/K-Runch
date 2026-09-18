@@ -101,9 +101,9 @@ export const menuItemImages: Record<string, string> = {
   "big-cola": "https://ik.imagekit.io/tijarahub/images/thumbnails/400/400/detailed/31/TijaraHub.jpeg.webp",
   "aswan-hibiscus": "https://images.pexels.com/photos/2672942/pexels-photo-2672942.jpeg?auto=compress&cs=tinysrgb&w=800",
   "sobia-milk": "https://images.deliveryhero.io/image/talabat/MenuItems/Natural_Sobia_juice_638577090280383191.jpg",
-  "tamarind": "https://images.pexels.com/photos/34534512/pexels-photo-34534512.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "tamarind": "https://images.pexels.com/photos/34467110/pexels-photo-34467110.jpeg?auto=compress&cs=tinysrgb&w=800",
   "kharoub": "https://redlandsranchmarket.com/cdn/shop/files/CarobDrinks.webp?v=1777651867&width=1946",
-  "sakans-mix": "https://images.pexels.com/photos/4239/pexels-photo-4239.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "sakans-mix": "https://images.pexels.com/photos/36630822/pexels-photo-36630822.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // وجبات اللحوم والدجاج
   "kofta-sogoq-meal": "/images/menu/photo_77_2026-09-16_18-14-05.jpg",
