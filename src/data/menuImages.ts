@@ -95,7 +95,7 @@ export const menuItemImages: Record<string, string> = {
   // المشروبات
   "pepsi-cans": "https://media.almashhad.com/twitter/1719304092906_insHa.webp",
   "free-cola": "https://images.pexels.com/photos/8879617/pexels-photo-8879617.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "twist-classic": "https://www.alkhan-mart.com/images/thumbs/0007100_-250-_450.jpeg",
+  "twist-classic": "https://m.media-amazon.com/images/I/41%2BK0EHk2fL.jpg",
   "pepsi-1-5l": "https://images.pexels.com/photos/7073594/pexels-photo-7073594.jpeg?auto=compress&cs=tinysrgb&w=800",
   "almarai-rayeb": "https://www.osmanmarket.com/us/136/pidwebp600/3753/f132829107947451737086-1.webp",
   "big-cola": "https://ik.imagekit.io/tijarahub/images/thumbnails/400/400/detailed/31/TijaraHub.jpeg.webp",
