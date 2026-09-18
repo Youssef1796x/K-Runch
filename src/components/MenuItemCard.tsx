@@ -32,7 +32,7 @@ export default function MenuItemCard({
   );
   const currentPrice = item.price ?? selectedOption?.price;
   const imageSrc = item.image || menuItemImages[item.id] || "";
-  const displayName = item.id === "honey-moon" ? "شهر العسل" : item.name;
+  const displayName = item.name;
   const isExternalImage = /^https?:\/\//.test(imageSrc);
 
   return (
