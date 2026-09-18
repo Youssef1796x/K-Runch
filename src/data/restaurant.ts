@@ -79,16 +79,16 @@ export const restaurantConfig: RestaurantConfig = {
 
   reviews: [
     {
-      name: "كريم",
-      username: "@demo_kareem",
-      initial: "ك",
-      text: "جربت الأكل وكانت التجربة حلوة جدًا والطعم ممتاز والكمية كويسة أكيد هكرر الطلب تاني",
+      name: "زياد أحمد",
+      username: "@zeyad_ahmed",
+      initial: "ز",
+      text: "السي فود حلو اوي ونضيف والكريب حشوه كتير وطعمه حلو",
     },
     {
-      name: "سارة",
-      username: "@demo_sara",
-      initial: "س",
-      text: "الأكل وصل مرتب وساخن وطعمه كان ممتاز والطلب كان سهل جدًا تجربة لطيفة فعلًا",
+      name: "محمد",
+      username: "@mohamed",
+      initial: "م",
+      text: "اكل جامد جدا تسلم اديهم",
     },
   ],
 
