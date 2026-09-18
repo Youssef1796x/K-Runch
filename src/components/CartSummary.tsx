@@ -455,7 +455,7 @@ export default function CartSummary({
                               aria-pressed={selected}
                               className={`rounded-xl border px-3 py-3 text-sm font-bold transition-colors ${
                                 selected
-                                  ? "border-(--accent) bg-(--accent) text-foreground"
+                                  ? "border-(--accent) bg-(--accent) text-black"
                                   : "border-(--line) bg-background text-(--ink-soft) hover:border-(--accent) hover:text-(--ink)"
                               }`}
                             >

@@ -23,14 +23,14 @@ export default function Hero() {
 
             <a
               href="#menu"
-              className="mt-5 inline-flex items-center justify-center rounded-xl bg-(--accent) px-6 py-3 text-sm font-bold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:opacity-90"
+              className="mt-5 inline-flex items-center justify-center rounded-xl bg-(--accent) px-6 py-3 text-sm font-bold text-black shadow-sm transition-all hover:-translate-y-0.5 hover:opacity-90"
             >
               {restaurantConfig.hero.cta}
             </a>
           </div>
         </div>
 
-        <div className="order-1 mx-auto w-full max-w-140 overflow-hidden rounded-[28px] border-3 border-[#e8623a45] lg:order-2">
+        <div className="order-1 mx-auto w-full max-w-140 overflow-hidden rounded-[28px] border-3 border-[#e8c75a45] lg:order-2">
           <Image
             src={restaurantConfig.banner}
             alt={`بانر مطعم ${restaurantConfig.name}`}
