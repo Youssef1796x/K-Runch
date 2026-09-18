@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1a0f16;
-  --foreground: #e8ddd2;
+  --background: #3B3635;
+  --foreground: #3B3635;
 
-  --ink: #e8ddd2;
-  --ink-soft: #a89a8c;
-  --ink-muted: #7a6d62;
-  --accent: #e8623a;
-  --accent-soft: #f0a780;
-  --accent-glow: rgba(232, 98, 58, 0.15);
-  --surface: #241720;
-  --surface-tint: #1f1418;
-  --line: #3a2a30;
-  --line-soft: #2d1f24;
-  --grid-line: rgba(180, 160, 140, 0.06);
+  --ink: #F4C9A7;
+  --ink-soft: #D4B59A;
+  --ink-muted: #A88D78;
+  --accent: #F4C9A7;
+  --accent-soft: #FBDCBF;
+  --accent-glow: rgba(244, 201, 167, 0.12);
+  --surface: #473F3D;
+  --surface-tint: #332E2C;
+  --line: #5C504E;
+  --line-soft: #4A403E;
+  --grid-line: rgba(244, 201, 167, 0.04);
 }
 
 @theme inline {
@@ -36,8 +36,15 @@ html {
 body {
   overflow-x: hidden;
   background: var(--background);
-  color: var(--foreground);
+  color: var(--ink);
   font-family: var(--font-cairo), sans-serif;
+}
+
+/* === Headings — serif for brand identity === */
+h1,
+h2,
+h3 {
+  font-family: var(--font-amiri), var(--font-cairo), serif;
 }
 
 /* === Page shell === */
@@ -55,7 +62,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(26, 15, 22, 0.88);
+  background: rgba(59, 54, 53, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
@@ -146,7 +153,7 @@ body {
 
 /* === Footer === */
 .site-footer {
-  background: rgba(36, 23, 32, 0.5);
+  background: rgba(71, 63, 61, 0.5);
   border-top: 1px solid var(--line);
 }
 
@@ -192,7 +199,7 @@ body {
 /* === Mobile navigation === */
 .mobile-navigation {
   border-top: 1px solid var(--line);
-  background: rgba(36, 23, 32, 0.98);
+  background: rgba(59, 54, 53, 0.98);
 }
 .mobile-nav-link {
   display: block;
@@ -225,7 +232,7 @@ body {
   height: 48px;
   width: 48px;
   border-radius: 9999px;
-  border: 2.5px solid #e8623a45;
+  border: 2.5px solid rgba(244, 201, 167, 0.3);
   object-fit: cover;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }

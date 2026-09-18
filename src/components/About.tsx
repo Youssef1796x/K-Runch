@@ -19,7 +19,7 @@ export default function About() {
               alt={`لوجو ${restaurantConfig.name}`}
               width={96}
               height={96}
-              className="h-32 w-32 rounded-2xl border-3 border-[#e8623a45] object-cover"
+              className="h-32 w-32 rounded-2xl border-3 border-[#f4c9a74d] object-cover"
             />
           </div>
 
