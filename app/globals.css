@@ -7,9 +7,9 @@
   --ink: #ffffff;
   --ink-soft: #c0c0c0;
   --ink-muted: #888888;
-  --accent: #cfa340;
-  --accent-soft: #e0bd66;
-  --accent-glow: rgba(207, 163, 64, 0.1);
+  --accent: #e8c75a;
+  --accent-soft: #f0d988;
+  --accent-glow: rgba(232, 199, 90, 0.1);
   --surface: #383838;
   --surface-tint: #333333;
   --line: #4a4a4a;
@@ -226,7 +226,7 @@ body {
   height: 48px;
   width: 48px;
   border-radius: 9999px;
-  border: 2.5px solid #cfa34045;
+  border: 2.5px solid #e8c75a45;
   object-fit: cover;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
