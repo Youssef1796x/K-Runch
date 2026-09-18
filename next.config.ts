@@ -20,6 +20,26 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "www.ajegroup.com",
       },
+      {
+        protocol: "https",
+        hostname: "media.almashhad.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.alkhan-mart.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.osmanmarket.com",
+      },
+      {
+        protocol: "https",
+        hostname: "ik.imagekit.io",
+      },
+      {
+        protocol: "https",
+        hostname: "images.deliveryhero.io",
+      },
     ],
   },
 };
