@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "images.pexels.com",
-      },
+      },\n      {\n        protocol: "https",\n        hostname: "redlandsranchmarket.com",\n      },\n      {\n        protocol: "https",\n        hostname: "www.ajegroup.com",\n      },
     ],
   },
 };
