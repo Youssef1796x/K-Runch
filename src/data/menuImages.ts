@@ -77,7 +77,7 @@ export const menuItemImages: Record<string, string> = {
   "twins": "https://images.pexels.com/photos/18530640/pexels-photo-18530640.jpeg?auto=compress&cs=tinysrgb&w=800",
   "mix-sauce": "https://images.pexels.com/photos/29285460/pexels-photo-29285460.jpeg?auto=compress&cs=tinysrgb&w=800",
   "lava-buffalo": "https://images.pexels.com/photos/8463433/pexels-photo-8463433.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "flamingo": "https://images.pexels.com/photos/27758758/pexels-photo-27758758.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "flamingo": "https://images.pexels.com/photos/29285464/pexels-photo-29285464.jpeg?auto=compress&cs=tinysrgb&w=800",
   "extreme": "https://images.pexels.com/photos/20535802/pexels-photo-20535802.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // قسم الحرش
