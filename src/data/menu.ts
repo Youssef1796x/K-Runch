@@ -865,7 +865,7 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "تمر هندي أصلي",
     price: 25,
-    image: "",
+    image: "/images/menu/tamarind-original.svg",
     available: true,
   },
   {
