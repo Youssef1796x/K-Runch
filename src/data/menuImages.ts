@@ -81,10 +81,10 @@ export const menuItemImages: Record<string, string> = {
   "extreme": "https://images.pexels.com/photos/20535802/pexels-photo-20535802.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // قسم الحرش
-  "kebda": "/images/menu/photo_58_2026-09-16_18-14-05.jpg",
-  "sogoq": "/images/menu/photo_59_2026-09-16_18-14-05.jpg",
-  "hawawshi": "/images/menu/photo_60_2026-09-16_18-14-05.jpg",
-  "mokh-al-prince": "/images/menu/photo_61_2026-09-16_18-14-05.jpg",
+  "kebda": "https://images.pexels.com/photos/5191833/pexels-photo-5191833.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "sogoq": "https://images.pexels.com/photos/5860681/pexels-photo-5860681.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "hawawshi": "https://images.pexels.com/photos/36925858/pexels-photo-36925858.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "mokh-al-prince": "https://images.pexels.com/photos/37049898/pexels-photo-37049898.jpeg?auto=compress&cs=tinysrgb&w=800",
   "mombar-sandwich": "/images/menu/photo_62_2026-09-16_18-14-05.jpg",
 
   // وجبات الحرش
