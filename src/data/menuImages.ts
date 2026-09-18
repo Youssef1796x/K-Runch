@@ -88,7 +88,7 @@ export const menuItemImages: Record<string, string> = {
   "mombar-sandwich": "https://images.pexels.com/photos/16229424/pexels-photo-16229424.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // وجبات الحرش
-  "kings-meal": "https://images.pexels.com/photos/96619/pexels-photo-96619.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "kings-meal": "https://images.pexels.com/photos/96618/pexels-photo-96618.jpeg?auto=compress&cs=tinysrgb&w=800",
   "candy-beef": "https://images.pexels.com/photos/13065203/pexels-photo-13065203.jpeg?auto=compress&cs=tinysrgb&w=800",
   "kokoroko": "https://images.pexels.com/photos/24738518/pexels-photo-24738518.jpeg?auto=compress&cs=tinysrgb&w=800",
 
