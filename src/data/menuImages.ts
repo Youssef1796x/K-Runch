@@ -73,12 +73,12 @@ export const menuItemImages: Record<string, string> = {
   "toscani": "https://images.pexels.com/photos/17346205/pexels-photo-17346205.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // قسم البطاطس
-  "cheetos-potato": "/images/menu/photo_52_2026-09-16_18-14-05.jpg",
-  "twins": "/images/menu/photo_53_2026-09-16_18-14-05.jpg",
-  "mix-sauce": "/images/menu/photo_54_2026-09-16_18-14-05.jpg",
-  "lava-buffalo": "/images/menu/photo_55_2026-09-16_18-14-05.jpg",
-  "flamingo": "/images/menu/photo_56_2026-09-16_18-14-05.jpg",
-  "extreme": "/images/menu/photo_57_2026-09-16_18-14-05.jpg",
+  "cheetos-potato": "https://images.pexels.com/photos/8254061/pexels-photo-8254061.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "twins": "https://images.pexels.com/photos/18530640/pexels-photo-18530640.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "mix-sauce": "https://images.pexels.com/photos/29285462/pexels-photo-29285462.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "lava-buffalo": "https://images.pexels.com/photos/8463433/pexels-photo-8463433.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "flamingo": "https://images.pexels.com/photos/27758758/pexels-photo-27758758.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "extreme": "https://images.pexels.com/photos/29285461/pexels-photo-29285461.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // قسم الحرش
   "kebda": "/images/menu/photo_58_2026-09-16_18-14-05.jpg",
