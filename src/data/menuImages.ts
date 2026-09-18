@@ -101,7 +101,7 @@ export const menuItemImages: Record<string, string> = {
   "big-cola": "https://ik.imagekit.io/tijarahub/images/thumbnails/400/400/detailed/31/TijaraHub.jpeg.webp",
   "aswan-hibiscus": "https://images.pexels.com/photos/2672942/pexels-photo-2672942.jpeg?auto=compress&cs=tinysrgb&w=800",
   "sobia-milk": "https://images.deliveryhero.io/image/talabat/MenuItems/Natural_Sobia_juice_638577090280383191.jpg",
-  // Real photo: Fresh Tamarind Juice by Catherine Amia (CC BY-SA 4.0)\n  "tamarind": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Fresh_Tamarind_Juice.jpg",
+  // Real photo: Fresh Tamarind Juice by Catherine Amia (CC BY-SA 4.0)\n  "tamarind": "https://snapcalorie-webflow-website.s3.us-east-2.amazonaws.com/media/food_pics_v2/medium/tamarind_fresh_juice.jpg",
   "kharoub": "https://redlandsranchmarket.com/cdn/shop/files/CarobDrinks.webp?v=1777651867&width=1946",
   "sakans-mix": "https://images.pexels.com/photos/36630822/pexels-photo-36630822.jpeg?auto=compress&cs=tinysrgb&w=800",
 
