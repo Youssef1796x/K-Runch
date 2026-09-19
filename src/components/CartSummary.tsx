@@ -256,9 +256,9 @@ export default function CartSummary({
             <span className="relative isolate mr-2 inline-flex min-w-20 items-center justify-center">
               <span
                 aria-hidden="true"
-                className="order-cta-pulse pointer-events-none absolute size-11 rounded-full bg-(--accent) opacity-25"
+                className="order-cta-pulse pointer-events-none absolute inset-[-6px] rounded-full border-2 border-(--accent)"
               />
-              <span className="relative z-10">اطلب الآن</span>
+              <span className="relative z-10 drop-shadow-[0_0_10px_rgba(232,199,90,0.45)]">اطلب الآن</span>
             </span>
             <span className="mr-6">({totalQuantity}) أصناف</span>
           </span>
