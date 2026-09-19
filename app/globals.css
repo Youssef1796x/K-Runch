@@ -164,6 +164,30 @@ body {
   border-radius: 9999px;
 }
 
+/* === Order CTA pulse === */
+.order-cta-pulse {
+  transform-origin: center;
+  animation: order-cta-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes order-cta-pulse {
+  0%,
+  100% {
+    transform: scale(0.88);
+    opacity: 0.18;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.34;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .order-cta-pulse {
+    animation: none;
+  }
+}
+
 /* === Mobile menu button === */
 .menu-btn {
   display: inline-flex;
