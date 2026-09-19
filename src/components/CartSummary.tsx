@@ -249,11 +249,17 @@ export default function CartSummary({
           className="flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border border-(--accent) bg-(--surface) px-4 py-3 text-right shadow-[0_14px_36px_rgba(0,0,0,0.28)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
           aria-haspopup="dialog"
           aria-expanded={isOpen}
-          aria-label="مراجعة الطلب"
+          aria-label="فتح الطلب"
         >
           <span className="flex items-center text-sm font-bold text-(--ink)">
             <ShoppingBag size={18} aria-hidden="true" />
-            <span className="mr-2">راجع طلبك</span>
+            <span className="relative isolate mr-2 inline-flex min-w-20 items-center justify-center">
+              <span
+                aria-hidden="true"
+                className="order-cta-pulse pointer-events-none absolute size-11 rounded-full bg-(--accent) opacity-25"
+              />
+              <span className="relative z-10">اطلب الآن</span>
+            </span>
             <span className="mr-6">({totalQuantity}) أصناف</span>
           </span>
           <span className="text-sm font-bold text-(--accent)">{totalPrice} جنيه</span>
