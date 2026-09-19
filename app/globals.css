@@ -164,27 +164,36 @@ body {
   border-radius: 9999px;
 }
 
-/* === Order CTA pulse === */
+/* === Order CTA glow === */
 .order-cta-pulse {
   transform-origin: center;
-  animation: order-cta-pulse 1.6s ease-in-out infinite;
+  box-shadow: 0 0 0 0 var(--accent-border);
+  animation: order-cta-pulse 1.7s ease-out infinite;
 }
 
 @keyframes order-cta-pulse {
-  0%,
-  100% {
-    transform: scale(0.88);
-    opacity: 0.18;
+  0% {
+    transform: scale(0.94);
+    opacity: 0.9;
+    box-shadow: 0 0 0 0 var(--accent-border);
   }
-  50% {
-    transform: scale(1.18);
-    opacity: 0.34;
+  65% {
+    transform: scale(1.04);
+    opacity: 0.35;
+    box-shadow: 0 0 0 8px rgba(232, 199, 90, 0.08);
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+    box-shadow: 0 0 0 13px rgba(232, 199, 90, 0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .order-cta-pulse {
     animation: none;
+    opacity: 0.55;
+    box-shadow: 0 0 0 3px var(--accent-border);
   }
 }
 
