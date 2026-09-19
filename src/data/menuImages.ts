@@ -2,7 +2,7 @@ export const menuItemImages: Record<string, string> = {
   // كريب الدجاج
   "king-smoky": "/images/menu/photo_1_2026-09-16_18-14-04.jpg",
   "sonic-bomb-crepe": "/images/menu/photo_2_2026-09-16_18-14-04.jpg",
-  "el-chico-fajita": "/images/menu/photo_3_2026-09-16_18-14-04.jpg",
+  "el-chico-fajita": "/images/menu/photo_3_2026-09-19_14-54-01.jpg",
   "ranchista": "/images/menu/photo_4_2026-09-16_18-14-04.jpg",
   "al-peccino": "/images/menu/photo_5_2026-09-16_18-14-04.jpg",
   "blue-wave-crepe": "/images/menu/photo_6_2026-09-16_18-14-04.jpg",
