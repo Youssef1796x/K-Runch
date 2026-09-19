@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Maximize2, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { MenuItem } from "@/src/data/menu";
 import { menuItemImages } from "@/src/data/menuImages";
 
@@ -26,6 +26,38 @@ export default function MenuItemCard({
   onIncrease,
 }: MenuItemCardProps) {
   const [isImageOpen, setIsImageOpen] = useState(false);
+  const [isImageModalMounted, setIsImageModalMounted] = useState(false);
+  const closeImageTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (closeImageTimeoutRef.current !== null) {
+        window.clearTimeout(closeImageTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const openImage = () => {
+    if (closeImageTimeoutRef.current !== null) {
+      window.clearTimeout(closeImageTimeoutRef.current);
+      closeImageTimeoutRef.current = null;
+    }
+
+    setIsImageModalMounted(true);
+
+    window.requestAnimationFrame(() => {
+      setIsImageOpen(true);
+    });
+  };
+
+  const closeImage = () => {
+    setIsImageOpen(false);
+
+    closeImageTimeoutRef.current = window.setTimeout(() => {
+      setIsImageModalMounted(false);
+      closeImageTimeoutRef.current = null;
+    }, 200);
+  };
 
   const selectedOption = item.priceOptions?.find(
     (option) => option.label === selectedOptionLabel,
@@ -51,7 +83,7 @@ export default function MenuItemCard({
             />
             <button
               type="button"
-              onClick={() => setIsImageOpen(true)}
+              onClick={openImage}
               aria-label={`تكبير صورة ${displayName}`}
               className="absolute bottom-1.5 inset-s-1.5 inline-flex size-8 items-center justify-center rounded-lg border border-white/15 bg-black/65 text-white shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
             >
@@ -142,21 +174,27 @@ export default function MenuItemCard({
         </div>
       </div>
 
-      {isImageOpen && imageSrc ? (
+      {isImageModalMounted && imageSrc ? (
         <div
-          className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 p-4"
+          className={`fixed inset-0 z-100 flex items-center justify-center bg-black/80 p-4 transition-opacity duration-200 ease-out motion-reduce:transition-none ${
+            isImageOpen ? "opacity-100" : "opacity-0"
+          }`}
           role="dialog"
           aria-modal="true"
           aria-label={`صورة ${displayName}`}
-          onClick={() => setIsImageOpen(false)}
+          onClick={closeImage}
         >
           <div
-            className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-2xl bg-(--surface)"
+            className={`relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-2xl bg-(--surface) transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none ${
+              isImageOpen
+                ? "scale-100 opacity-100"
+                : "scale-[0.96] opacity-0"
+            }`}
             onClick={(event) => event.stopPropagation()}
           >
             <button
               type="button"
-              onClick={() => setIsImageOpen(false)}
+              onClick={closeImage}
               aria-label="إغلاق الصورة"
               className="absolute inset-e-3 top-3 z-10 inline-flex size-10 items-center justify-center rounded-full bg-black/70 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
             >
