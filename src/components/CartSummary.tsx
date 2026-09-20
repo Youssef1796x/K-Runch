@@ -251,16 +251,18 @@ export default function CartSummary({
           aria-expanded={isOpen}
           aria-label="فتح الطلب"
         >
-          <span className="flex items-center text-sm font-bold text-(--ink)">
-            <ShoppingBag size={18} aria-hidden="true" />
-            <span className="relative isolate mr-2 inline-flex min-w-20 items-center justify-center">
-              <span
-                aria-hidden="true"
-                className="order-cta-pulse pointer-events-none absolute inset-[-6px] rounded-full border-2 border-(--accent)"
-              />
-              <span className="relative z-10 drop-shadow-[0_0_10px_rgba(232,199,90,0.45)]">اطلب الآن</span>
+          <span className="flex items-center gap-3 text-sm font-bold text-(--ink)">
+            <span className="inline-flex items-center gap-2">
+              <ShoppingBag size={18} aria-hidden="true" className="shrink-0" />
+              <span className="relative isolate inline-flex min-w-20 items-center justify-center">
+                <span
+                  aria-hidden="true"
+                  className="order-cta-pulse pointer-events-none absolute inset-[-6px] rounded-full border-2 border-(--accent)"
+                />
+                <span className="relative z-10 drop-shadow-[0_0_10px_rgba(232,199,90,0.45)]">اطلب الآن</span>
+              </span>
             </span>
-            <span className="mr-6">({totalQuantity}) أصناف</span>
+            <span className="text-xs font-semibold text-(--ink-soft)">({totalQuantity}) أصناف</span>
           </span>
           <span className="text-sm font-bold text-(--accent)">{totalPrice} جنيه</span>
         </button>
