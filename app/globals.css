@@ -169,14 +169,14 @@ body {
   transform-origin: center;
   background: color-mix(in srgb, var(--accent) 30%, var(--surface) 70%);
   box-shadow: 0 0 18px rgba(232, 199, 90, 0.16);
-  animation: order-cta-scale 3s ease-in-out infinite;
+  animation: order-cta-scale 3.6s ease-in-out infinite;
   will-change: transform;
 }
 
 @keyframes order-cta-scale {
   0%,
   100% {
-    transform: scale(0.1);
+    transform: scale(0.24);
   }
 
   50% {
