@@ -165,7 +165,7 @@ body {
 }
 
 /* === Order CTA circle === */
-.order-cta-scale {
+.order-cta-circle {
   transform-origin: center;
   animation: order-cta-scale 2.4s ease-in-out infinite;
   will-change: transform;
@@ -174,7 +174,7 @@ body {
 @keyframes order-cta-scale {
   0%,
   100% {
-    transform: scale(0.88);
+    transform: scale(0.9);
   }
 
   50% {
@@ -183,7 +183,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .order-cta-scale {
+  .order-cta-circle {
     animation: none;
   }
 }
