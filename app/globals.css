@@ -164,34 +164,27 @@ body {
   border-radius: 9999px;
 }
 
-/* === Order CTA glow === */
-.order-cta-pulse {
+/* === Order CTA circle === */
+.order-cta-scale {
   transform-origin: center;
-  box-shadow: 0 0 0 0 var(--accent-border);
-  animation: order-cta-pulse 2.4s ease-out infinite;
-  will-change: transform, opacity;
+  animation: order-cta-scale 2.4s ease-in-out infinite;
+  will-change: transform;
 }
 
-@keyframes order-cta-pulse {
-  0% {
-    transform: scale(0.88);
-    opacity: 0.55;
-  }
-  50% {
-    transform: scale(1);
-    opacity: 0.75;
-  }
+@keyframes order-cta-scale {
+  0%,
   100% {
     transform: scale(0.88);
-    opacity: 0.55;
+  }
+
+  50% {
+    transform: scale(1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .order-cta-pulse {
+  .order-cta-scale {
     animation: none;
-    opacity: 0.55;
-    box-shadow: 0 0 0 2px var(--accent-border);
   }
 }
 
