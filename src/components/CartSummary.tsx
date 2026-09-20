@@ -253,8 +253,12 @@ export default function CartSummary({
         >
           <span className="flex min-w-0 items-center gap-3 text-sm font-bold text-(--ink)">
             <ShoppingBag size={18} aria-hidden="true" className="shrink-0 text-(--ink-soft)" />
-            <span className="order-cta-circle inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-(--accent) text-(--surface)">
-              <span className="whitespace-nowrap text-xs font-bold">
+            <span className="relative inline-flex size-12 shrink-0 items-center justify-center">
+              <span
+                aria-hidden="true"
+                className="order-cta-circle pointer-events-none absolute size-10 rounded-full bg-(--accent)"
+              />
+              <span className="relative z-10 whitespace-nowrap drop-shadow-[0_0_10px_rgba(232,199,90,0.45)]">
                 اطلب الآن
               </span>
             </span>
