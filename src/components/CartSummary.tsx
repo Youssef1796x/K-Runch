@@ -246,7 +246,7 @@ export default function CartSummary({
         <button
           type="button"
           onClick={openModal}
-          className="flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border border-(--accent) bg-(--surface) px-4 py-3 text-right shadow-[0_14px_36px_rgba(0,0,0,0.28)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
+          className="flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border border-(--accent-border) bg-(--surface) px-4 py-3 text-right shadow-[0_14px_36px_rgba(0,0,0,0.28)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
           aria-haspopup="dialog"
           aria-expanded={isOpen}
           aria-label="فتح الطلب"
@@ -256,9 +256,9 @@ export default function CartSummary({
             <span className="relative inline-flex size-12 shrink-0 items-center justify-center">
               <span
                 aria-hidden="true"
-                className="order-cta-circle pointer-events-none absolute size-10 rounded-full bg-(--accent)"
+                className="order-cta-circle pointer-events-none absolute size-10 rounded-full"
               />
-              <span className="relative z-10 whitespace-nowrap drop-shadow-[0_0_10px_rgba(232,199,90,0.45)]">
+              <span className="relative z-10 whitespace-nowrap text-(--ink) drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
                 اطلب الآن
               </span>
             </span>
