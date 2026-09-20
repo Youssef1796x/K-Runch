@@ -256,7 +256,7 @@ export default function CartSummary({
             <span className="relative isolate inline-flex size-12 shrink-0 items-center justify-center">
               <span
                 aria-hidden="true"
-                className="order-cta-pulse pointer-events-none absolute inset-0 rounded-full border-2 border-(--accent)"
+                className="order-cta-scale pointer-events-none absolute inset-0 rounded-full bg-(--accent)"
               />
               <span className="relative z-10 whitespace-nowrap drop-shadow-[0_0_10px_rgba(232,199,90,0.45)]">
                 اطلب الآن
