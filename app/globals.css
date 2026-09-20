@@ -168,24 +168,24 @@ body {
 .order-cta-pulse {
   transform-origin: center;
   box-shadow: 0 0 0 0 var(--accent-border);
-  animation: order-cta-pulse 1.7s ease-out infinite;
+  animation: order-cta-pulse 2.2s ease-out infinite;
 }
 
 @keyframes order-cta-pulse {
   0% {
-    transform: scale(0.94);
-    opacity: 0.9;
+    transform: scale(0.96);
+    opacity: 0.75;
     box-shadow: 0 0 0 0 var(--accent-border);
   }
   65% {
-    transform: scale(1.04);
-    opacity: 0.35;
-    box-shadow: 0 0 0 8px rgba(232, 199, 90, 0.08);
+    transform: scale(1.02);
+    opacity: 0.28;
+    box-shadow: 0 0 0 6px rgba(232, 199, 90, 0.06);
   }
   100% {
-    transform: scale(1.08);
+    transform: scale(1.05);
     opacity: 0;
-    box-shadow: 0 0 0 13px rgba(232, 199, 90, 0);
+    box-shadow: 0 0 0 10px rgba(232, 199, 90, 0);
   }
 }
 
