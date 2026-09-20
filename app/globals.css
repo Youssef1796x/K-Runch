@@ -176,7 +176,7 @@ body {
 @keyframes order-cta-scale {
   0%,
   100% {
-    transform: scale(0.32);
+    transform: scale(0.42);
   }
 
   50% {
