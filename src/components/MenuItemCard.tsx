@@ -104,7 +104,7 @@ export default function MenuItemCard({
         </div>
 
         {item.priceOptions?.length ? (
-          <div className="mt-3 flex flex-wrap gap-1.5" aria-label={`اختار حجم ${displayName}`}>
+          <div className="mt-3 grid grid-cols-3 gap-1.5" aria-label={`اختار حجم ${displayName}`}>
             {item.priceOptions.map((option) => {
               const isSelected = option.label === selectedOptionLabel;
 
