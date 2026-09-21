@@ -38,7 +38,7 @@ export const menuItemImages: Record<string, string> = {
 
   // بيف برجر
   "cheesy-lazy": "/images/menu/photo_26_2026-09-16_18-14-04.jpg",
-  "classic-combo": "/images/menu/photo_27_2026-09-16_18-14-04.jpg",
+  "classic-combo": "https://i.pinimg.com/736x/02/67/95/0267958231dadb2984bc9a31f1d1d880.jpg",
   "cowboy": "/images/menu/photo_28_2026-09-16_18-14-04.jpg",
   "mushroom-lava": "/images/menu/photo_29_2026-09-16_18-14-04.jpg",
 
@@ -81,8 +81,8 @@ export const menuItemImages: Record<string, string> = {
   "extreme": "https://images.pexels.com/photos/20535802/pexels-photo-20535802.jpeg?auto=compress&cs=tinysrgb&w=800",
 
   // قسم الحرش
-  "kebda": "https://images.pexels.com/photos/20500494/pexels-photo-20500494.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "sogoq": "https://images.pexels.com/photos/34636424/pexels-photo-34636424.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "kebda": "https://i.pinimg.com/1200x/51/d0/cc/51d0cce0a78c3368dcab980ad5156a4a.jpg",
+  "sogoq": "https://i.pinimg.com/1200x/a4/7d/99/a47d9966d385401a00e0b80cda1aec04.jpg",
   "hawawshi": "https://images.pexels.com/photos/37290076/pexels-photo-37290076.jpeg?auto=compress&cs=tinysrgb&w=800",
   "mokh-al-prince": "https://images.pexels.com/photos/37049908/pexels-photo-37049908.jpeg?auto=compress&cs=tinysrgb&w=800",
   "mombar-sandwich": "https://images.pexels.com/photos/16229424/pexels-photo-16229424.jpeg?auto=compress&cs=tinysrgb&w=800",

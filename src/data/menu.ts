@@ -15,7 +15,6 @@ export type MenuItem = {
   description?: string;
   price?: number;
   priceOptions?: PriceOption[];
-  image: string;
   available: boolean;
 };
 
@@ -46,7 +45,6 @@ export const menuItems: MenuItem[] = [
     name: "كينج سموكي",
     description: "قطع دجاج متبلة، صوص باربيكيو مدخن، ميكس جبن، خضار",
     price: 130,
-    image: "",
     available: true,
   },
   {
@@ -55,7 +53,6 @@ export const menuItems: MenuItem[] = [
     name: "سونيك بوم",
     description: "دجاج زنجر مقرمش سبايسي، صوص حار، وموزاريلا",
     price: 130,
-    image: "",
     available: true,
   },
   {
@@ -64,7 +61,6 @@ export const menuItems: MenuItem[] = [
     name: "التشيكو فاهيتا",
     description: "شرائح دجاج فاهيتا متبلة، بصل وفلفل ملون، تتبيلة مكسيكية",
     price: 135,
-    image: "",
     available: true,
   },
   {
@@ -73,7 +69,6 @@ export const menuItems: MenuItem[] = [
     name: "رانشيستا",
     description: "قطع دجاج مشوية، صوص رانش كريمي، وموزاريلا",
     price: 130,
-    image: "",
     available: true,
   },
   {
@@ -82,7 +77,6 @@ export const menuItems: MenuItem[] = [
     name: "البيتشينو",
     description: "قطع دجاج، صوص كريمي غني، ميكس أجبان دسمة",
     price: 140,
-    image: "",
     available: true,
   },
   {
@@ -91,7 +85,6 @@ export const menuItems: MenuItem[] = [
     name: "بلو ويف",
     description: "قطع دجاج، صوص الجبنة الريكفورد المميزة، وموزاريلا",
     price: 140,
-    image: "",
     available: true,
   },
   {
@@ -100,7 +93,6 @@ export const menuItems: MenuItem[] = [
     name: "تشيكن مونستر",
     description: "ميكس دجاج مقرمش ومشوي، حشو مضاعف، وموزاريلا",
     price: 140,
-    image: "",
     available: true,
   },
 
@@ -111,7 +103,6 @@ export const menuItems: MenuItem[] = [
     name: "ميكس الحاتي",
     description: "توليفة شرقية مميزة من الكفتة والسجق البلدي مع الموزاريلا",
     price: 140,
-    image: "",
     available: true,
   },
   {
@@ -120,7 +111,6 @@ export const menuItems: MenuItem[] = [
     name: "تشيلي بومب هوت دوج",
     description: "شرائح هوت دوج مكسيكانو، صوص تشيلي حار، موزاريلا، جبنة تركي",
     price: 140,
-    image: "",
     available: true,
   },
   {
@@ -129,7 +119,6 @@ export const menuItems: MenuItem[] = [
     name: "حدوقة ميكس جبن",
     description: "توليفة مميزة من الجبن الشيدر والموزاريلا والتركي السايح",
     price: 110,
-    image: "",
     available: true,
   },
 
@@ -140,7 +129,6 @@ export const menuItems: MenuItem[] = [
     name: "تيتانك ميكس سي فود",
     description: "جمبري مقلي كرانشي، سبيط مقرمش، طحينة، وموزاريلا",
     price: 210,
-    image: "",
     available: true,
   },
   {
@@ -149,7 +137,6 @@ export const menuItems: MenuItem[] = [
     name: "طرح البحر ميكس سي فود",
     description: "ميكس جمبري وسبيط مشوي بالزبدة والثوم والليمون، وموزاريلا",
     price: 210,
-    image: "",
     available: true,
   },
 
@@ -160,7 +147,6 @@ export const menuItems: MenuItem[] = [
     name: "نوتيلا بوم",
     description: "شوكولاتة نوتيلا ومكسرات",
     price: 70,
-    image: "",
     available: true,
   },
   {
@@ -169,7 +155,6 @@ export const menuItems: MenuItem[] = [
     name: "نوتيلا بانانا",
     description: "نوتيلا، قطع موز فريش، ومكسرات",
     price: 90,
-    image: "",
     available: true,
   },
   {
@@ -178,7 +163,6 @@ export const menuItems: MenuItem[] = [
     name: "نوتي بوم كاندي",
     description: "مارشميلو، نوتيلا ومكسرات، وقطع كاندي",
     price: 90,
-    image: "",
     available: true,
   },
 
@@ -192,7 +176,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 100 },
       { label: "كبير", price: 130 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -204,7 +187,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 100 },
       { label: "كبير", price: 130 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -216,7 +198,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 110 },
       { label: "كبير", price: 140 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -228,7 +209,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 100 },
       { label: "كبير", price: 130 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -240,7 +220,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 100 },
       { label: "كبير", price: 130 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -252,7 +231,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 100 },
       { label: "كبير", price: 130 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -264,7 +242,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 100 },
       { label: "كبير", price: 130 },
     ],
-    image: "",
     available: true,
   },
 
@@ -278,7 +255,6 @@ export const menuItems: MenuItem[] = [
       { label: "سنجل", price: 120 },
       { label: "دبل", price: 150 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -290,7 +266,6 @@ export const menuItems: MenuItem[] = [
       { label: "سنجل", price: 120 },
       { label: "دبل", price: 150 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -302,7 +277,6 @@ export const menuItems: MenuItem[] = [
       { label: "سنجل", price: 120 },
       { label: "دبل", price: 150 },
     ],
-    image: "",
     available: true,
   },
 
@@ -316,7 +290,6 @@ export const menuItems: MenuItem[] = [
       { label: "سنجل", price: 150 },
       { label: "دبل", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -325,7 +298,6 @@ export const menuItems: MenuItem[] = [
     name: "كلاسيك كومبو (وجبة شاملة)",
     description: "ساندوتش برجر لحم كلاسيكي + بطاطس مقرمشة + بيبسي كولا",
     price: 150,
-    image: "",
     available: true,
   },
   {
@@ -337,7 +309,6 @@ export const menuItems: MenuItem[] = [
       { label: "سنجل", price: 150 },
       { label: "دبل", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -349,7 +320,6 @@ export const menuItems: MenuItem[] = [
       { label: "سنجل", price: 150 },
       { label: "دبل", price: 210 },
     ],
-    image: "",
     available: true,
   },
 
@@ -363,7 +333,6 @@ export const menuItems: MenuItem[] = [
       { label: "سنجل", price: 150 },
       { label: "دبل", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -375,7 +344,6 @@ export const menuItems: MenuItem[] = [
       { label: "سنجل", price: 150 },
       { label: "دبل", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -387,7 +355,6 @@ export const menuItems: MenuItem[] = [
       { label: "سنجل", price: 150 },
       { label: "دبل", price: 210 },
     ],
-    image: "",
     available: true,
   },
 
@@ -399,7 +366,6 @@ export const menuItems: MenuItem[] = [
     description:
       "وجبة اللمّة والروقان: ميكس فوسفور مشوي على الجريل بالزبدة والثوم، ينزل فوق رز صيادية مفلفل مع السلطات والعيش",
     price: 250,
-    image: "",
     available: true,
   },
   {
@@ -409,7 +375,6 @@ export const menuItems: MenuItem[] = [
     description:
       "ملوك المقرمش والكرانشي: تشكيلة بحرية مقلية بخلطة تتبيلة زمان السرية، قرمشة لآخر قطعة بتنزل مع الطحينة والعيش",
     price: 250,
-    image: "",
     available: true,
   },
   {
@@ -419,7 +384,6 @@ export const menuItems: MenuItem[] = [
     description:
       "طاسة الطاقة والدسم: ميكس سي فود غرقان في صوص الجبنة الشيدر والموزاريلا السايحة مع بهارات المطعم الحارة الحصرية",
     price: 250,
-    image: "",
     available: true,
   },
 
@@ -433,7 +397,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 150 },
       { label: "كبير", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -445,7 +408,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 150 },
       { label: "كبير", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -458,7 +420,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 150 },
       { label: "كبير", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -470,7 +431,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 150 },
       { label: "كبير", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -482,7 +442,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 150 },
       { label: "كبير", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -494,7 +453,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 150 },
       { label: "كبير", price: 210 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -503,7 +461,6 @@ export const menuItems: MenuItem[] = [
     name: "أباتشي",
     description: "ساندوتش فرنسي كبير بحشوة سي فود وصوصات مميزة",
     price: 210,
-    image: "",
     available: true,
   },
 
@@ -519,7 +476,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 180 },
       { label: "كبير", price: 220 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -533,7 +489,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 200 },
       { label: "كبير", price: 240 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -547,7 +502,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 240 },
       { label: "كبير", price: 300 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -561,7 +515,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 250 },
       { label: "كبير", price: 300 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -575,7 +528,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 250 },
       { label: "كبير", price: 300 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -585,7 +537,6 @@ export const menuItems: MenuItem[] = [
     description:
       "طاجن الفوسفور والطاقة: باستا غنية بالجمبري والكاليماري مع الوايت صوص الكريمي والموزاريلا",
     price: 250,
-    image: "",
     available: true,
   },
   {
@@ -599,7 +550,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 200 },
       { label: "كبير", price: 250 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -613,7 +563,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 200 },
       { label: "كبير", price: 250 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -627,7 +576,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 200 },
       { label: "كبير", price: 250 },
     ],
-    image: "",
     available: true,
   },
 
@@ -640,9 +588,8 @@ export const menuItems: MenuItem[] = [
     priceOptions: [
       { label: "باكت", price: 45 },
       { label: "سندوتش", price: 55 },
-      { label: "سوري",price: 55 },
+      { label: "سوري", price: 55 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -654,7 +601,6 @@ export const menuItems: MenuItem[] = [
       { label: "باكت", price: 35 },
       { label: "سندوتش", price: 45 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -666,7 +612,6 @@ export const menuItems: MenuItem[] = [
       { label: "باكت", price: 45 },
       { label: "سندوتش", price: 55 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -678,7 +623,6 @@ export const menuItems: MenuItem[] = [
       { label: "باكت", price: 45 },
       { label: "سندوتش", price: 55 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -690,7 +634,6 @@ export const menuItems: MenuItem[] = [
       { label: "باكت", price: 70 },
       { label: "سندوتش", price: 85 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -702,7 +645,6 @@ export const menuItems: MenuItem[] = [
       { label: "باكت", price: 70 },
       { label: "سندوتش", price: 80 },
     ],
-    image: "",
     available: true,
   },
 
@@ -718,7 +660,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 70 },
       { label: "كبير", price: 90 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -731,7 +672,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 75 },
       { label: "كبير", price: 100 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -744,7 +684,6 @@ export const menuItems: MenuItem[] = [
       { label: "وسط", price: 45 },
       { label: "كبير", price: 75 },
     ],
-    image: "",
     available: true,
   },
   {
@@ -753,7 +692,6 @@ export const menuItems: MenuItem[] = [
     name: "مخ سندوتش البرنس",
     description: "قطع المخ المقلي بخلطة البرنس الشهيرة، قرمشة وطعم أصيل",
     price: 75,
-    image: "",
     available: true,
   },
   {
@@ -762,7 +700,6 @@ export const menuItems: MenuItem[] = [
     name: "ممبار سندوتش",
     description: "أصابع الممبار البلدي المحمر والمقرمش بخلطة الأرز المتبلة",
     price: 75,
-    image: "",
     available: true,
   },
 
@@ -774,7 +711,6 @@ export const menuItems: MenuItem[] = [
     description:
       "ملوك الفخامة الشرقية: ميكس ممبار محمر ومقرمش + مخ مقلي + الخبز الطازج",
     price: 250,
-    image: "",
     available: true,
   },
   {
@@ -783,7 +719,6 @@ export const menuItems: MenuItem[] = [
     name: "كباب حلة كاندي بيف",
     description: "قطع اللحم البقري الدايبة المستوية على الهادي بالبصل المكرمل",
     price: 100,
-    image: "",
     available: true,
   },
   {
@@ -792,7 +727,6 @@ export const menuItems: MenuItem[] = [
     name: "كوكوروكو سوسيس",
     description: "سيخ السوسيس المقرمش الكوري المغطى بالكفر الذهبي والجبن",
     price: 100,
-    image: "",
     available: true,
   },
 
@@ -802,7 +736,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "بيبسي كانز",
     price: 25,
-    image: "",
     available: true,
   },
   {
@@ -810,7 +743,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "فري كولا",
     price: 25,
-    image: "",
     available: true,
   },
   {
@@ -818,7 +750,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "تويست كلاسيك",
     price: 25,
-    image: "",
     available: true,
   },
   {
@@ -826,7 +757,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "لتر ونص بيبسي",
     price: 50,
-    image: "",
     available: true,
   },
   {
@@ -834,7 +764,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "رايب المراعي",
     price: 25,
-    image: "",
     available: true,
   },
   {
@@ -842,7 +771,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "بيج كولا",
     price: 15,
-    image: "",
     available: true,
   },
   {
@@ -850,7 +778,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "كركديه أسواني أصلي",
     price: 25,
-    image: "",
     available: true,
   },
   {
@@ -858,7 +785,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "سوبيا حليب",
     price: 35,
-    image: "",
     available: true,
   },
   {
@@ -866,7 +792,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "تمر هندي أصلي",
     price: 25,
-    image: "",
     available: true,
   },
   {
@@ -874,7 +799,6 @@ export const menuItems: MenuItem[] = [
     category: "drinks",
     name: "خروب أصلي",
     price: 35,
-    image: "",
     available: true,
   },
   {
@@ -884,7 +808,6 @@ export const menuItems: MenuItem[] = [
     description:
       "اختر ميكسك المفضل: تمر هندي مع كركديه / خروب مع كركديه / سوبيا مع تمر هندي",
     price: 35,
-    image: "",
     available: true,
   },
 
@@ -896,7 +819,6 @@ export const menuItems: MenuItem[] = [
     description:
       "التوليفة الشرقية المعتمدة: أصابع كفتة مشوية وسجق بلدي متبل، تنزل فوق أرز بسمتي مفلفل مع صوصات المطعم والعيش",
     price: 150,
-    image: "",
     available: true,
   },
   {
@@ -906,7 +828,6 @@ export const menuItems: MenuItem[] = [
     description:
       "وجبة الطاقة والدجاج: قطع شيش طاووق متبلة ومشوية على الجريل مع الخضار الملون، تقدم فوق أرز بسمتي مع الصوصات والعيش",
     price: 150,
-    image: "",
     available: true,
   },
 ];
