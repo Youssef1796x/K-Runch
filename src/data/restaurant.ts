@@ -53,12 +53,12 @@ export const restaurantConfig: RestaurantConfig = {
   banner: "/images/profile/banner.png",
 
   about: {
-    heading: "أكل يفرحك من أول لقمة",
+    heading: "طعم جديد بشكل جديد",
     body: "في K & Runch بنحب الأكل اللي يتعمل بحب ويتاكل وهو لسه سخن وهدفنا نقدم أكل طعمه جامد، بسيط، ويخليك ترجع تاني.",
   },
 
   hero: {
-    heading: "طعم مصري على مزاجك",
+    heading: "طعم جديد بشكل جديد",
     body: "برجر، ساندوتشات وكريب معمولين بحب وطعم يخليك ترجع تاني.",
     cta: "شوف المنيو",
   },
@@ -94,6 +94,6 @@ export const restaurantConfig: RestaurantConfig = {
 
   footer: {
     name: "K & Runch",
-    tagline: "مطعم مصري جامد",
+    tagline: "New taste New look",
   },
 };

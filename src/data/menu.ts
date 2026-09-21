@@ -640,6 +640,7 @@ export const menuItems: MenuItem[] = [
     priceOptions: [
       { label: "باكت", price: 45 },
       { label: "سندوتش", price: 55 },
+      { label: "سوري",price: 55 },
     ],
     image: "",
     available: true,

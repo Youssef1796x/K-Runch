@@ -4,7 +4,7 @@ export const menuItemImages: Record<string, string> = {
   "sonic-bomb-crepe": "/images/menu/photo_2_2026-09-16_18-14-04.jpg",
   "el-chico-fajita": "/images/menu/photo_3_2026-09-19_14-54-01.jpg",
   "ranchista": "https://img0.didiglobal.com/static/soda_public/img_13ef1e13144d5e782518aa3c55a74118.png",
-  "al-peccino": "/images/menu/photo_5_2026-09-16_18-14-04.jpg",
+  "al-peccino": "https://i.pinimg.com/736x/6b/ff/d1/6bffd10e299287690d2722fa96b77eaf.jpg",
   "blue-wave-crepe": "/images/menu/photo_6_2026-09-16_18-14-04.jpg",
   "chicken-monster": "https://rabtmenu.com/storage/app/public/item/item-68ed4bc345fde.webp",
 
@@ -28,7 +28,7 @@ export const menuItemImages: Record<string, string> = {
   "sonic-bomb-sandwich": "/images/menu/photo_18_2026-09-16_18-14-04.jpg",
   "fire-shot": "/images/menu/photo_19_2026-09-16_18-14-04.jpg",
   "shish-pop": "/images/menu/photo_20_2026-09-16_18-14-04.jpg",
-  "buffalo-bomb": "/images/menu/photo_21_2026-09-16_18-14-04.jpg",
+  "buffalo-bomb": "https://i.pinimg.com/1200x/be/59/6f/be596f6650b2537beb5cec96080eff8f.jpg",
   "fajita-class": "/images/menu/photo_22_2026-09-16_18-14-04.jpg",
 
   // تشيكن برجر
