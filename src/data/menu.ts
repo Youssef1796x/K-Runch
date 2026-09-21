@@ -592,7 +592,6 @@ export const menuItems: MenuItem[] = [
   ],
   available: true,
 },
-
 {
   id: "twins",
   category: "fries-zone",
@@ -605,7 +604,6 @@ export const menuItems: MenuItem[] = [
   ],
   available: true,
 },
-
 {
   id: "mix-sauce",
   category: "fries-zone",
@@ -618,7 +616,6 @@ export const menuItems: MenuItem[] = [
   ],
   available: true,
 },
-
 {
   id: "lava-buffalo",
   category: "fries-zone",
@@ -631,7 +628,6 @@ export const menuItems: MenuItem[] = [
   ],
   available: true,
 },
-
 {
   id: "flamingo",
   category: "fries-zone",
@@ -644,7 +640,6 @@ export const menuItems: MenuItem[] = [
   ],
   available: true,
 },
-
 {
   id: "extreme",
   category: "fries-zone",
