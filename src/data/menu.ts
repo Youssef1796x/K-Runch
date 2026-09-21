@@ -581,235 +581,82 @@ export const menuItems: MenuItem[] = [
 
   // قسم البطاطس
   {
-    id: "cheetos-potato",
-    category: "fries-zone",
-    name: "شيتوس بوتيتو",
-    description: "أصابع بطاطس، صوص الجبنة الشيدر السايحة، وفتات شيتوس المقرمش",
-    priceOptions: [
-      { label: "باكت", price: 45 },
-      { label: "سندوتش", price: 55 },
-      { label: "سوري", price: 55 },
-    ],
-    available: true,
-  },
-  {
-    id: "twins",
-    category: "fries-zone",
-    name: "التوينز",
-    description: "ميكس البطاطس المزدوج بتوليفة مميزة من صوصات المطعم",
-    priceOptions: [
-      { label: "باكت", price: 35 },
-      { label: "سندوتش", price: 45 },
-    ],
-    available: true,
-  },
-  {
-    id: "mix-sauce",
-    category: "fries-zone",
-    name: "ميكس صوصات",
-    description: "أصابع البطاطس الذهبية الغرقانة بتشكيلة من الصوصات الخاصة",
-    priceOptions: [
-      { label: "باكت", price: 45 },
-      { label: "سندوتش", price: 55 },
-    ],
-    available: true,
-  },
-  {
-    id: "lava-buffalo",
-    category: "fries-zone",
-    name: "لافا بافلو",
-    description: "بركان البطاطس المشعلة بصوص البافلو الحار واللاذع",
-    priceOptions: [
-      { label: "باكت", price: 45 },
-      { label: "سندوتش", price: 55 },
-    ],
-    available: true,
-  },
-  {
-    id: "flamingo",
-    category: "fries-zone",
-    name: "فلامنجو",
-    description: "البطاطس المقرمشة بصوص الفلامنجو المميز المبتكر للمطعم",
-    priceOptions: [
-      { label: "باكت", price: 70 },
-      { label: "سندوتش", price: 85 },
-    ],
-    available: true,
-  },
-  {
-    id: "extreme",
-    category: "fries-zone",
-    name: "إكستريم",
-    description: "وجبة البطاطس العملاقة الغنية بالإضافات وأقوى النكهات",
-    priceOptions: [
-      { label: "باكت", price: 70 },
-      { label: "سندوتش", price: 80 },
-    ],
-    available: true,
-  },
+  id: "cheetos-potato",
+  category: "fries-zone",
+  name: "شيتوس بوتيتو",
+  description: "أصابع بطاطس، صوص الجبنة الشيدر السايحة، وفتات شيتوس المقرمش",
+  priceOptions: [
+    { label: "باكت", price: 45 },
+    { label: "سندوتش", price: 55 },
+    { label: "سوري", price: 55 },
+  ],
+  available: true,
+},
 
-  // قسم الحرش
-  {
-    id: "kebda",
-    category: "al-harash",
-    name: "كبدة",
-    description:
-      "شرائح الكبدة الإسكندراني المتبلة بالثوم، الفلفل الحار، والليمون",
-    priceOptions: [
-      { label: "صغير", price: 40 },
-      { label: "وسط", price: 70 },
-      { label: "كبير", price: 90 },
-    ],
-    available: true,
-  },
-  {
-    id: "sogoq",
-    category: "al-harash",
-    name: "سجق",
-    description: "السجق الشرقي المتشوح بخلطة الطماطم، البصل، والبهارات الخاصة",
-    priceOptions: [
-      { label: "صغير", price: 45 },
-      { label: "وسط", price: 75 },
-      { label: "كبير", price: 100 },
-    ],
-    available: true,
-  },
-  {
-    id: "hawawshi",
-    category: "al-harash",
-    name: "حواوشي",
-    description:
-      "رغيف الحواوشي البلدي المقرمش المليان باللحمة المفرومة المتبلة",
-    priceOptions: [
-      { label: "وسط", price: 45 },
-      { label: "كبير", price: 75 },
-    ],
-    available: true,
-  },
-  {
-    id: "mokh-al-prince",
-    category: "al-harash",
-    name: "مخ سندوتش البرنس",
-    description: "قطع المخ المقلي بخلطة البرنس الشهيرة، قرمشة وطعم أصيل",
-    price: 75,
-    available: true,
-  },
-  {
-    id: "mombar-sandwich",
-    category: "al-harash",
-    name: "ممبار سندوتش",
-    description: "أصابع الممبار البلدي المحمر والمقرمش بخلطة الأرز المتبلة",
-    price: 75,
-    available: true,
-  },
+{
+  id: "twins",
+  category: "fries-zone",
+  name: "التوينز",
+  description: "ميكس البطاطس المزدوج بتوليفة مميزة من صوصات المطعم",
+  priceOptions: [
+    { label: "باكت", price: 35 },
+    { label: "سندوتش", price: 45 },
+    { label: "سوري", price: 45 },
+  ],
+  available: true,
+},
 
-  // وجبات الحرش
-  {
-    id: "kings-meal",
-    category: "al-harash-meals",
-    name: "وجبة الملوك",
-    description:
-      "ملوك الفخامة الشرقية: ميكس ممبار محمر ومقرمش + مخ مقلي + الخبز الطازج",
-    price: 250,
-    available: true,
-  },
-  {
-    id: "candy-beef",
-    category: "al-harash-meals",
-    name: "كباب حلة كاندي بيف",
-    description: "قطع اللحم البقري الدايبة المستوية على الهادي بالبصل المكرمل",
-    price: 100,
-    available: true,
-  },
-  {
-    id: "kokoroko",
-    category: "al-harash-meals",
-    name: "كوكوروكو سوسيس",
-    description: "سيخ السوسيس المقرمش الكوري المغطى بالكفر الذهبي والجبن",
-    price: 100,
-    available: true,
-  },
+{
+  id: "mix-sauce",
+  category: "fries-zone",
+  name: "ميكس صوصات",
+  description: "أصابع البطاطس الذهبية الغرقانة بتشكيلة من الصوصات الخاصة",
+  priceOptions: [
+    { label: "باكت", price: 45 },
+    { label: "سندوتش", price: 55 },
+    { label: "سوري", price: 55 },
+  ],
+  available: true,
+},
 
-  // المشروبات
-  {
-    id: "pepsi-cans",
-    category: "drinks",
-    name: "بيبسي كانز",
-    price: 25,
-    available: true,
-  },
-  {
-    id: "free-cola",
-    category: "drinks",
-    name: "فري كولا",
-    price: 25,
-    available: true,
-  },
-  {
-    id: "twist-classic",
-    category: "drinks",
-    name: "تويست كلاسيك",
-    price: 25,
-    available: true,
-  },
-  {
-    id: "pepsi-1-5l",
-    category: "drinks",
-    name: "لتر ونص بيبسي",
-    price: 50,
-    available: true,
-  },
-  {
-    id: "almarai-rayeb",
-    category: "drinks",
-    name: "رايب المراعي",
-    price: 25,
-    available: true,
-  },
-  {
-    id: "big-cola",
-    category: "drinks",
-    name: "بيج كولا",
-    price: 15,
-    available: true,
-  },
-  {
-    id: "aswan-hibiscus",
-    category: "drinks",
-    name: "كركديه أسواني أصلي",
-    price: 25,
-    available: true,
-  },
-  {
-    id: "sobia-milk",
-    category: "drinks",
-    name: "سوبيا حليب",
-    price: 35,
-    available: true,
-  },
-  {
-    id: "tamarind",
-    category: "drinks",
-    name: "تمر هندي أصلي",
-    price: 25,
-    available: true,
-  },
-  {
-    id: "kharoub",
-    category: "drinks",
-    name: "خروب أصلي",
-    price: 35,
-    available: true,
-  },
-  {
-    id: "sakans-mix",
-    category: "drinks",
-    name: "سكلانس",
-    description:
-      "اختر ميكسك المفضل: تمر هندي مع كركديه / خروب مع كركديه / سوبيا مع تمر هندي",
-    price: 35,
-    available: true,
-  },
+{
+  id: "lava-buffalo",
+  category: "fries-zone",
+  name: "لافا بافلو",
+  description: "بركان البطاطس المشعلة بصوص البافلو الحار واللاذع",
+  priceOptions: [
+    { label: "باكت", price: 45 },
+    { label: "سندوتش", price: 55 },
+    { label: "سوري", price: 55 },
+  ],
+  available: true,
+},
+
+{
+  id: "flamingo",
+  category: "fries-zone",
+  name: "فلامنجو",
+  description: "البطاطس المقرمشة بصوص الفلامنجو المميز المبتكر للمطعم",
+  priceOptions: [
+    { label: "باكت", price: 70 },
+    { label: "سندوتش", price: 85 },
+    { label: "سوري", price: 80 },
+  ],
+  available: true,
+},
+
+{
+  id: "extreme",
+  category: "fries-zone",
+  name: "إكستريم",
+  description: "وجبة البطاطس العملاقة الغنية بالإضافات وأقوى النكهات",
+  priceOptions: [
+    { label: "باكت", price: 70 },
+    { label: "سندوتش", price: 80 },
+    { label: "سوري", price: 80 },
+  ],
+  available: true,
+},
 
   // وجبات اللحوم والدجاج
   {
