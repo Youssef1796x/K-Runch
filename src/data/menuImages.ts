@@ -1,12 +1,12 @@
 export const menuItemImages: Record<string, string> = {
   // كريب الدجاج
-  "king-smoky": "/images/menu/photo_1_2026-09-16_18-14-04.jpg",
+  "king-smoky": "https://imageproxy.wolt.com/menu/menu-images/shared/3d047b84-935e-11ee-82d5-52e74660381e_chicken_bbq.jpg",
   "sonic-bomb-crepe": "/images/menu/photo_2_2026-09-16_18-14-04.jpg",
   "el-chico-fajita": "/images/menu/photo_3_2026-09-19_14-54-01.jpg",
-  "ranchista": "/images/menu/photo_4_2026-09-16_18-14-04.jpg",
+  "ranchista": "https://img0.didiglobal.com/static/soda_public/img_13ef1e13144d5e782518aa3c55a74118.png",
   "al-peccino": "/images/menu/photo_5_2026-09-16_18-14-04.jpg",
   "blue-wave-crepe": "/images/menu/photo_6_2026-09-16_18-14-04.jpg",
-  "chicken-monster": "/images/menu/photo_7_2026-09-16_18-14-04.jpg",
+  "chicken-monster": "https://rabtmenu.com/storage/app/public/item/item-68ed4bc345fde.webp",
 
   // كريب اللحوم والأجبان
   "el-haty-mix": "/images/menu/photo_8_2026-09-16_18-14-04.jpg",
