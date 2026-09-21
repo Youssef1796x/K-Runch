@@ -63,7 +63,7 @@ export default function MenuItemCard({
     (option) => option.label === selectedOptionLabel,
   );
   const currentPrice = item.price ?? selectedOption?.price;
-  const imageSrc = item.image || menuItemImages[item.id] || "";
+  const imageSrc = menuItemImages[item.id] || "";
   const displayName = item.name;
   const isExternalImage = /^https?:\/\//.test(imageSrc);
 
