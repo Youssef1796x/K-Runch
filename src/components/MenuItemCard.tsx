@@ -104,7 +104,7 @@ export default function MenuItemCard({
         </div>
 
         {item.priceOptions?.length ? (
-          <div className="mt-3 grid grid-cols-[repeat(3,minmax(0,1fr))] gap-1.5" aria-label={`اختار حجم ${displayName}`}>
+          <div className="mt-3 flex flex-wrap gap-1.5" aria-label={`اختار حجم ${displayName}`}>
             {item.priceOptions.map((option) => {
               const isSelected = option.label === selectedOptionLabel;
 
@@ -114,7 +114,7 @@ export default function MenuItemCard({
                   type="button"
                   onClick={() => onSelectOption(option.label)}
                   aria-pressed={isSelected}
-                  className={`min-w-0 rounded-md border px-1.5 py-1.5 text-xs font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent) ${
+                  className={`rounded-md border px-3 py-1.5 text-xs font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent) ${
                     isSelected
                       ? "border-(--accent) bg-(--accent) text-black"
                       : "border-(--line) bg-background text-(--ink-soft) hover:border-(--accent) hover:text-(--ink)"
